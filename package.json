@@ -1,7 +1,7 @@
 {
-  "name": "turmaster-v6-7-auteuil",
-  "version": "6.7.1",
-  "description": "TurfMaster V6.7.1 Auteuil 16 partants + V\u00e9rification D\u00e9taill\u00e9e compl\u00e8te Bot 6h30",
+  "name": "turmaster-v7-auto",
+  "version": "7.0.0",
+  "description": "TurfMaster V7 AUTO - Course du jour automatique Vincennes etc",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -9,10 +9,7 @@
   "dependencies": {
     "express": "^4.18.2",
     "cors": "^2.8.5",
-    "node-fetch": "^2.6.12",
-    "node-cron": "^3.0.3"
-  },
-  "engines": {
-    "node": "18.x"
+    "node-cron": "^3.0.3",
+    "axios": "^1.7.2"
   }
 }

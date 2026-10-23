@@ -1,10 +1,9 @@
 services:
   - type: web
-    name: turmaster-v6-7-auteuil
+    name: turmaster-v7-auto
     env: node
-    region: frankfurt
-    plan: free
-    branch: main
-    buildCommand: npm install
-    startCommand: npm start
-    healthCheckPath: /api/bot/status
+    buildCommand: yarn install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 20
