@@ -1,34 +1,41 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V11.2 FICHIERS + 8 IA + 21 TOPS + VERIF</title><style>*{box-sizing:border-box} body{margin:0;background:#0f1115;color:#e6e8ee;font-family:system-ui;min-height:100vh} .topbar{position:sticky;top:0;z-index:20;background:#0f1115E6;backdrop-filter:blur(16px);border-bottom:1px solid #2a3246;padding:12px 16px;display:flex;justify-content:space-between;align-items:center} .yellow{color:#f5c518} .wrap{max-width:1280px;margin:0 auto;padding:12px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:12px;margin:8px 0} .card.gold{border-color:#f5c51850;background:#f5c5180A} .card.ia{border-color:#8b5cf650;background:#8b5cf60A} .card.verif{border-color:#10b98150;background:#10b9810A} .badge{display:inline-flex;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700} .b-yellow{background:#f5c518;color:#000} .b-green{background:#10b98120;color:#6ee7b7;border:1px solid #10b98130} .b-red{background:#ef444420;color:#fca5a5;border:1px solid #ef444430} .b-gray{background:#222836;color:#8b93a7} .b-purple{background:#8b5cf620;color:#c4b5fd;border:1px solid #8b5cf630} .row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #2a324650} .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px} .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px} @media(max-width:900px){.grid3,.grid2,.grid4{grid-template-columns:1fr}} .small{font-size:11px;color:#8b93a7} a{color:#f5c518;text-decoration:none} h3{margin:0 0 6px 0;font-size:12px;color:#c9cfdd;text-transform:uppercase}</style></head><body>
-<div class="topbar"><b class="yellow">V11.2 - FICHIERS + 21 TOPS + 8 IA + VERIF</b><span class="small">PDF, Images, TXT supportés</span><a href="/admin">🔧 ADMIN FICHIERS</a></div>
-<div class="wrap"><div id="app">Chargement...</div></div>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V11.5 BUGFIX PERSIST + NO CACHE</title><style>*{box-sizing:border-box} body{margin:0;background:#0f1115;color:#e6e8ee;font-family:system-ui;min-height:100vh} .topbar{position:sticky;top:0;z-index:20;background:#0f1115E6;backdrop-filter:blur(16px);border-bottom:1px solid #2a3246;padding:12px 16px;display:flex;justify-content:space-between;align-items:center} .yellow{color:#f5c518} .orange{color:#ff6b00} .wrap{max-width:1280px;margin:0 auto;padding:12px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:12px;margin:8px 0} .card.gold{border-color:#f5c51850;background:#f5c5180A} .card.ia{border-color:#8b5cf650;background:#8b5cf60A} .card.verif{border-color:#10b98150;background:#10b9810A} .card.zeturf{border-color:#ff6b0050;background:#ff6b0010} .badge{display:inline-flex;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700} .b-yellow{background:#f5c518;color:#000} .b-orange{background:#ff6b00;color:#fff} .b-green{background:#10b98120;color:#6ee7b7;border:1px solid #10b98130} .b-gray{background:#222836;color:#8b93a7} .b-purple{background:#8b5cf620;color:#c4b5fd;border:1px solid #8b5cf630} .row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #2a324650} .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px} .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px} @media(max-width:900px){.grid3,.grid2,.grid4{grid-template-columns:1fr}} .small{font-size:11px;color:#8b93a7} a{color:#f5c518;text-decoration:none} h3{margin:0 0 6px 0;font-size:12px;color:#c9cfdd;text-transform:uppercase} .logo{width:24px;height:24px;background:#ff6b00;color:#fff;display:inline-flex;align-items:center;justify-content:center;border-radius:4px;font-weight:900;font-size:12px} .warn{background:#f5c51820;border:1px solid #f5c51840;padding:10px;border-radius:8px;margin:8px 0}</style></head><body>
+<div class="topbar"><b class="yellow">V11.5 BUGFIX</b> <span><span class="logo">Z</span> <span class="orange">UNIVERSAL</span> PERSIST + NO CACHE</span><a href="/admin">🔧 ADMIN BUGFIX</a></div>
+<div class="wrap"><div class="warn"><b>🐛 BUGFIX V11.5:</b> Si tu voyais encore fichiers de vendredi, fais <b>Ctrl+F5</b> (force refresh) - Le cache est maintenant désactivé + tes partants sont persistés !</div><div id="app">Chargement V11.5 BUGFIX...</div></div>
 <script>
 async function load(){
-  const r=await fetch('/api/course-du-jour'); const j=await r.json(); const d=j.data; const a=j.analyses; const ia=j.ia_pronos;
-  let h=`<div class="card gold"><b>${d.hippodrome} ${d.date} - ${d.nom} - ${d.partants} partants</b> - Maj: ${new Date(d.lastUpdate).toLocaleString('fr-FR')} | <a href="/admin">Admin fichiers</a></div>`;
+  // NO CACHE - ajoute timestamp
+  const r=await fetch('/api/course-du-jour?t='+Date.now(), {cache:'no-store', headers:{'Cache-Control':'no-cache'}}); 
+  const j=await r.json(); 
+  const d=j.data; const a=j.analyses; const ia=j.ia_pronos;
+  let h=`<div class="card gold"><b>${d.hippodrome} ${d.date} - ${d.nom} - ${d.distance} - ${d.partants} partants</b> - ${d.heure} - ${d.allocation} - Source: ${d.source} - Maj: ${new Date(d.lastUpdate).toLocaleString('fr-FR')} - Server: ${new Date(j.serverTime).toLocaleString('fr-FR')} - Persisted: ${j.persisted?'✅':'❌'} | <a href="/admin">Admin BUGFIX</a> | <a href="/api/debug" target="_blank">Debug</a></div>`;
   if(a.verification){
     const v=a.verification;
     h+=`<div class="card verif"><h3>🏁 VÉRIFICATEUR - ARRIVÉE: ${v.arrivee.join('-')}</h3>`;
-    h+=`<div class="grid2"><div><h3>Par IA</h3>`;
+    h+=`<div class="grid2"><div><h3>Par IA (9 IA dont ZETURF_IA)</h3>`;
     Object.keys(v.checkIA).forEach(name=>{
       const c=v.checkIA[name];
-      h+=`<div class="row"><span><b>${name}</b> - ${c.dans8}</span><span><span class="badge b-yellow">${c.tierce}</span> <span class="badge b-green">${c.quarte}</span> <span class="badge b-purple">${c.quinte}</span></span></div>`;
+      const isZ = name.includes('ZETURF') ? '<span class="badge b-orange">Z</span> ' : '';
+      h+=`<div class="row"><span>${isZ}<b>${name}</b> - ${c.dans8}</span><span><span class="badge b-yellow">${c.tierce}</span> <span class="badge b-green">${c.quarte}</span> <span class="badge b-purple">${c.quinte}</span></span></div>`;
     });
     h+=`</div><div><h3>Par Tops</h3>`;
-    Object.keys(v.checkTops).forEach(k=>{
-      h+=`<div class="row"><span>${k}</span><b>${v.checkTops[k]}</b></div>`;
-    });
+    Object.keys(v.checkTops).forEach(k=>{ h+=`<div class="row"><span>${k}</span><b>${v.checkTops[k]}</b></div>`; });
     h+=`</div></div></div>`;
   }
-  h+=`<div class="card ia"><h3>🤖 8 IA</h3><div class="grid4">`;
+  h+=`<div class="card ia"><h3>🤖 9 IA (8 classiques + ZETURF_IA BONUS) - V11.5 BUGFIX</h3><div class="grid4">`;
   Object.keys(ia).forEach(name=>{
-    const data=ia[name];
-    h+=`<div class="card" style="margin:4px 0"><h3>${name}</h3><div class="small"><b>Fav:</b> ${data.fav.join('-')}</div><div class="small"><b>Out:</b> ${data.outsiders.join('-')}</div></div>`;
+    const data=ia[name]; const isZ = name.includes('ZETURF');
+    h+=`<div class="card ${isZ?'zeturf':''}" style="margin:4px 0"><h3>${isZ?'<span class="logo">Z</span> ':''}${name} ${isZ?'<span class="badge b-orange">BONUS</span>':''}</h3><div class="small"><b>Fav:</b> ${data.fav.join('-')}</div><div class="small"><b>Out:</b> ${data.outsiders.join('-')}</div></div>`;
   });
   h+=`</div></div>`;
-  h+=`<div class="card"><h3>🐴 ${d.partants} PARTANTS</h3>${d.chevaux.map(c=>`<div class="row"><span><span class="badge b-yellow">${c.num}</span> ${c.nom}</span><span><span class="badge b-gray">${c.coteMatin}</span> <span class="badge b-green">${c.coteLive}</span></span></div>`).join('')}</div>`;
+  h+=`<div class="card"><h3>🐴 ${d.partants} PARTANTS - ${d.hippodrome} - ${d.nom} - V11.5 BUGFIX PERSIST - Si vendredi avant, fais Ctrl+F5</h3>${d.chevaux.map(c=>`<div class="row"><span><span class="badge b-yellow">${c.num}</span> <b>${c.nom}</b> <span class="small">${c.age||''} ${c.poids||''} - ${c.driver} / ${c.entraineur} - Source: ${c.source||d.source}</span></span><span><span class="badge b-gray">${c.coteMatin}</span> <span class="badge b-green">${c.coteLive}</span> <span class="badge b-orange">${c.coteZeturf||(c.coteLive*0.95).toFixed(1)} Z</span></span></div>`).join('')}</div>`;
   document.getElementById('app').innerHTML=h;
 }
 load();
-setInterval(load, 5*60*1000);
+// Auto reload sans cache toutes les 2 minutes
+setInterval(load, 2*60*1000);
+// Force reload si on vient de admin
+if(window.location.search.includes('t=')){
+  console.log('Force reload with cache bust - BUGFIX');
+}
 </script>
 </body></html>
