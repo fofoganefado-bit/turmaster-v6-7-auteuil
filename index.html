@@ -1,10 +1,22 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V9 AUTO REAL GENY</title><style>body{font-family:Arial;padding:12px;background:#0f172a;color:#fff} .card{background:#fff;color:#111;border-radius:12px;padding:12px;margin:10px 0} .row{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0} .badge{background:#111;color:#fff;border-radius:12px;padding:3px 8px} a{color:#22c55e}</style></head><body>
-<h1>TM V9 AUTO REAL GENY - Vincennes 23/10 Prix Orionis 18 partants</h1>
-<p>Mode AUTO activé - Plus besoin de GitHub ! <a href="/admin">🔧 Aller à l'ADMIN pour mettre à jour demain en 10s</a></p>
-<div id="c">Chargement...</div>
-<script>fetch('/api/course-du-jour').then(r=>r.json()).then(j=>{
-  const d=j.data; let h=`<div class="card"><b>${d.hippodrome} ${d.date} - ${d.nom}</b> - ${d.distance} - ${d.heure} - ${d.partants} partants - Maj: ${j.lastUpdate}</div><div class="card"><h3>18 Partants REELS Geny.com</h3>`;
-  d.chevaux.forEach(c=>{ h+=`<div class="row"><span><b>${c.num} ${c.nom}</b> ${c.driver||''} - ${c.entraineur||''} - ${c.musique||''}</span><span class="badge">${c.coteMatin}</span></div>`});
-  h+=`</div>`; document.getElementById('c').innerHTML=h;
-});</script>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V10 AUTO COMPLET REAL GENY</title><style>body{font-family:Arial;padding:12px;background:#0f172a;color:#fff} .card{background:#fff;color:#111;border-radius:12px;padding:12px;margin:10px 0} .row{display:flex;justify-content:space-between;border-bottom:1px solid #eee;padding:8px 0;align-items:center} .badge{background:#111;color:#fff;border-radius:12px;padding:3px 8px;font-weight:bold} .badge.live{background:#22c55e} .top{background:#f0fdf4;border-left:4px solid #22c55e;padding:8px;margin:6px 0} a{color:#22c55e;text-decoration:none} .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}</style></head><body>
+<h1>V10 AUTO COMPLET - Vincennes 23/10 Prix Orionis - Top + Synthèse + Cotes Live 5min</h1>
+<p>Mode AUTO veille au soir OK - Analyses auto - Cotes Live auto toutes les 5 min - <a href="/admin">🔧 ADMIN pour mettre à jour demain soir en 10s</a></p>
+<div id="c">Chargement analyses auto...</div>
+<script>
+async function load(){
+  const r=await fetch('/api/course-du-jour'); const j=await r.json(); const d=j.data; const a=j.analyses;
+  let h=`<div class="card"><b>${d.hippodrome} ${d.date} - ${d.nom}</b> - ${d.distance} - ${d.heure} - ${d.partants} partants - Maj: ${new Date(j.lastUpdate||d.lastUpdate).toLocaleString('fr-FR')} - Prochaine cote Live: ${new Date(j.nextLiveUpdate).toLocaleTimeString()}</div>`;
+  h+=`<div class="grid">`;
+  h+=`<div class="card"><h3>⭐ FAVORI AUTO</h3><div class="top"><b>${a.favori.num} ${a.favori.nom}</b> - Cote ${a.favori.cote}</div><h3>🔥 TOP CHAUDS (5)</h3>${a.topChauds.map(c=>`<div class="top">${c.num} ${c.nom} - ${c.cote}</div>`).join('')}<h3>❄️ DÉLAISSÉS</h3>${a.delaisses.map(c=>`<div class="top">${c.num} ${c.nom}</div>`).join('')}</div>`;
+  h+=`<div class="card"><h3>🏇 TOP JOCKEYS AUTO</h3>${a.topJockeys.map(t=>`<div class="top">${t.driver} → ${t.chevaux} (${t.num})</div>`).join('')}<h3>👨‍🏫 TOP ENTRAINEURS AUTO</h3>${a.topEntraineurs.map(t=>`<div class="top">${t.entraineur} - ${t.partants} partants</div>`).join('')}<h3>🎯 PRONO 8 AUTO</h3><div class="top"><b>${a.prono8.join(' - ')}</b></div></div>`;
+  h+=`</div>`;
+  h+=`<div class="card"><h3>📰 SYNTHÈSE PRESSE AUTO</h3><p>${a.synthese}</p></div>`;
+  h+=`<div class="card"><h3>18 Partants - Cotes Matin / Live (auto toutes les 5 min)</h3>`;
+  d.chevaux.forEach(c=>{ h+=`<div class="row"><span><b>${c.num} ${c.nom}</b> ${c.driver||''} / ${c.entraineur||''} <small>${c.musique||''} ${c.gains||''}</small></span><span><span class="badge">${c.coteMatin}</span> <span class="badge live">${c.coteLive} ${c.tendance}</span></span></div>`});
+  h+=`</div>`;
+  document.getElementById('c').innerHTML=h;
+}
+load();
+setInterval(load, 5*60*1000);
+</script>
 </body></html>
