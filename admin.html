@@ -1,28 +1,10 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN V10 AUTO COMPLET</title><style>body{font-family:Arial;padding:20px;background:#0f172a;color:#fff} .card{background:#fff;color:#111;border-radius:12px;padding:16px;margin:12px 0} textarea{width:100%;height:220px;border-radius:8px;padding:10px;border:2px solid #22c55e} button{background:#22c55e;color:#fff;border:0;padding:12px 20px;border-radius:8px;font-weight:bold;cursor:pointer;margin:5px} button:hover{background:#16a34a} .log{background:#111;color:#0f0;padding:10px;border-radius:8px;font-family:monospace;white-space:pre-wrap;max-height:300px;overflow:auto} .green{background:#dcfce7;border:2px solid #22c55e;padding:12px;border-radius:8px;margin:10px 0;color:#111}</style></head><body>
-<h1>🟢 TurfMaster V10 AUTO COMPLET</h1>
-<div class="green"><b>NOUVEAU V10 :</b> Quand tu colles les partants, ça génère AUTOMATIQUEMENT :<br>✅ Top Jockey / Top Entraineur<br>✅ Synthèse Presse<br>✅ Pronostic 8 chevaux<br>✅ Cotes Live qui bougent toutes les 5 min toutes seules !<br><br><b>Tu peux le faire la veille au soir dès 19h quand Geny publie !</b></div>
-<div class="card"><h2>Mise à jour AUTO pour demain (10s) - La veille au soir c'est parfait !</h2>
-<p>1. Va sur Geny.com le soir vers 19h (partants du lendemain)<br>2. Copie tout (Ctrl+A Ctrl+C)<br>3. Colle ici → Clique METTRE À JOUR AUTO<br>4. C'est fini ! Analyses + Cotes Live auto !</p>
-<textarea id="t" placeholder="Colle ici tout le texte Geny.com de demain soir... Exemple:&#10;1 Jardyland&#10;2 Gitano Jack&#10;3 Iroise de Madker..."></textarea><br>
-<button onclick="autoUpdate()">🚀 METTRE À JOUR V10 AUTO (Top + Synthèse + Live)</button>
-<button onclick="check()">🔍 VOIR COURSE + ANALYSES ACTUELLES</button>
-<button onclick="location.href='/'">🏠 Voir le site public</button>
-<div id="log" class="log">Prêt V10 - Colle tes partants de la veille au soir...</div>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN V11 ULTIME 8 IA</title><style>body{background:#0f1115;color:#e6e8ee;font-family:system-ui;padding:20px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:16px;margin:12px 0} textarea{width:100%;height:200px;background:#0f1115;color:#e6e8ee;border:1px solid #2a3246;border-radius:8px;padding:12px} button{background:#f5c518;color:#000;border:0;padding:12px 20px;border-radius:8px;font-weight:700;cursor:pointer;margin:5px} .log{background:#0f1115;border:1px solid #2a3246;padding:10px;border-radius:8px;color:#6ee7b7;font-family:monospace;white-space:pre-wrap;max-height:300px;overflow:auto} .yellow{color:#f5c518} .green{background:#f5c51810;border:1px solid #f5c51830;padding:12px;border-radius:8px}</style></head><body>
+<h1 class="yellow">🟡 V11 ULTIME + 8 IA - 21 TOPS + IA</h1>
+<div class="green"><b>TOUT EST DEDANS :</b><br>
+✅ 21 Tops: Cotes Direct, Chevaux, Palmarès, Forme, Classe, Drivers, Entraineurs, Aptitude 1er/placé, Chronos, Position, Ecarts, Incontournables, Pour une place, Synthèse Pondérée/Globale, Zone ABC, Presse, Algo Perso<br>
+✅ <b>NOUVEAU: 8 IA avec 8 FAVORIS + 2 OUTSIDERS</b>: CHATGPT, Gemini, Claude, GROK, PERPLEXITY, Mistral, DeepSeek, Copilot<br>
+✅ <b>Synthèse Globale des 8 IA</b>: les plus cités + % consensus
 </div>
-<script>
-async function autoUpdate(){
-  const text=document.getElementById('t').value;
-  if(!text) return alert('Colle d'abord le texte Geny !');
-  document.getElementById('log').innerText='V10 génération Top + Synthèse + Live en cours...';
-  const r=await fetch('/api/auto-update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})});
-  const j=await r.json();
-  document.getElementById('log').innerText=JSON.stringify(j,null,2);
-  if(j.success) alert('✅ '+j.message+' - Top + Synthèse + Cotes Live auto activés !');
-}
-async function check(){
-  const r=await fetch('/api/course-du-jour'); const j=await r.json();
-  document.getElementById('log').innerText='COURSE:\n'+JSON.stringify(j.data,null,2)+'\n\nANALYSES:\n'+JSON.stringify(j.analyses,null,2);
-}
-check();
-</script>
+<div class="card"><h2 class="yellow">Mise à jour AUTO veille 19h (10s)</h2><textarea id="t" placeholder="Colle texte Geny..."></textarea><br><button onclick="autoUpdate()">🚀 METTRE À JOUR V11 ULTIME 8 IA</button><button onclick="check()">🔍 VOIR 21 TOPS + 8 IA</button><button onclick="location.href='/'">🏠 Voir site public</button><div id="log" class="log">Prêt V11 ULTIME 8 IA...</div></div>
+<script>async function autoUpdate(){const text=document.getElementById('t').value; if(!text) return alert('Colle texte'); document.getElementById('log').innerText='Génération 21 tops + 8 IA...'; const r=await fetch('/api/auto-update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})}); const j=await r.json(); document.getElementById('log').innerText=JSON.stringify(j,null,2); if(j.success) alert('✅ '+j.message);} async function check(){const r=await fetch('/api/course-du-jour'); const j=await r.json(); document.getElementById('log').innerText=JSON.stringify(j,null,2).slice(0,8000);} check();</script>
 </body></html>
