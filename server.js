@@ -2,9 +2,12 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const multer = require('multer');
+const upload = multer({dest:'uploads/', limits:{fileSize:20*1024*1024}});
+const fs = require('fs');
 const app = express();
 app.use(cors());
-app.use(express.json({limit:'5mb'}));
+app.use(express.json({limit:'10mb'}));
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -376,7 +379,7 @@ let IA_PRONOS = {
     ]
   }
 };
-let RESULTAT = null; // ex: [13,10,9,17,15] arrivée
+let RESULTAT = null;
 
 function genAllTops(chevaux){
   const sortedCote = [...chevaux].sort((a,b)=>a.cote-b.cote);
@@ -387,8 +390,8 @@ function genAllTops(chevaux){
   const topPalmares = [...chevaux].map(c=>{ const wins = (c.musique.match(/1a/g)||[]).length; return {...c, wins}; }).sort((a,b)=>b.wins-a.wins).slice(0,6);
   const topForme = [...chevaux].filter(c=>c.forme.includes('Excellente')||c.forme.includes('Très Bonne')).slice(0,6);
   const topClasse = sortedClasse.slice(0,6);
-  const topDrivers = [{driver:'E. Raffin', course:32},{driver:'F. Nivard', course:28},{driver:'A. Abrivard', course:26}];
-  const topEntraineurs = [{entraineur:'S. Guarato', course:31},{entraineur:'J.-P. Marmion', course:29}];
+  const topDrivers = [{driver:'E. Raffin', course:32}];
+  const topEntraineurs = [{entraineur:'S. Guarato', course:31}];
   const aptitude1er = sortedCote.slice(0,6);
   const aptitudePlace = sortedClasse.slice(0,6);
   const topChronos = sortedChrono.slice(0,6);
@@ -406,10 +409,8 @@ function genAllTops(chevaux){
   const syntheseIA = { fav: Object.entries(counterFav).sort((a,b)=>b[1]-a[1]).slice(0,8).map(([num,c])=>({num:parseInt(num), citations:c})), outsiders: Object.entries(counterOut).sort((a,b)=>b[1]-a[1]).slice(0,4).map(([num,c])=>({num:parseInt(num), citations:c})), global: `Base IA: ${Object.entries(counterFav).sort((a,b)=>b[1]-a[1])[0][0]} - ${Object.entries(counterFav).sort((a,b)=>b[1]-a[1])[1][0]}` };
   const prono8 = sortedCote.slice(0,8).map(c=>c.num);
   const baseBeton = sortedCote[0];
-
-  // Vérificateur résultats
   let verification = null;
-  if(RESULTAT && RESULTAT.length>=5){
+  if(RESULTAT && RESULTAT.length>=3){
     const arrivee = RESULTAT;
     const checkIA = {};
     Object.keys(IA_PRONOS).forEach(ia=>{
@@ -428,28 +429,92 @@ function genAllTops(chevaux){
     };
     verification = {arrivee, checkIA, checkTops, date: new Date().toISOString()};
   }
-
   return { topCotesDirect, topChevaux, topPalmares, topForme, topClasse, topDrivers, topEntraineurs, aptitude1er, aptitudePlace, topChronos, topPosition, ecarts, incontournables, pourUnePlace, synthesePonderee, syntheseGlobale, zoneABC, presse, algoPerso, prono8, baseBeton, syntheseIA, verification, synthese:`Favori ${sortedCote[0].nom}` };
 }
-
 function updateLive(){ CHEVAUX.forEach(c=>{ const base = LIVE[c.num]||c.cote*0.9; const v=(Math.random()-0.5)*1.2; LIVE[c.num]=Math.max(1.3, Math.round((base+v)*10)/10); }); }
 updateLive(); setInterval(updateLive, 5*60*1000);
+
+function parseTextToChevaux(text){
+  let newC=[];
+  text.split('\n').forEach(line=>{
+    const m=line.match(/^(\d{1,2})[\s\-\.]+([A-ZÀÂÉÈÊËÏÎÔÙÛÜÇ][A-Za-zÀÂÉÈÊËÏÎÔÙÛÜÇ \-']+)/);
+    if(m){
+      const num=parseInt(m[1]); const nom=m[2].trim().split(' ').slice(0,4).join(' ');
+      if(num>=1 && num<=24 && nom.length>2 && !newC.find(c=>c.num===num))
+        newC.push({num, nom, driver:'', entraineur:'', gains:'', musique:'', cote:10+Math.random()*40, forme:'Bonne', classe:7, chrono:"1'13\"0", corde:num});
+    }
+    // second pattern: "1 - Jardyland"
+    const m2=line.match(/(\d{1,2})\s*[-–]\s*([A-Za-z]+)/);
+    if(m2 && !newC.find(c=>c.num===parseInt(m2[1]))){
+      const num=parseInt(m2[1]); if(num<=24) newC.push({num, nom:m2[2], driver:'', entraineur:'', gains:'', musique:'', cote:15, forme:'Bonne', classe:7, chrono:"1'13\"0", corde:num});
+    }
+  });
+  return newC.sort((a,b)=>a.num-b.num);
+}
 
 app.get('/api/course-du-jour', (req,res)=>{
   const analyses = genAllTops(CHEVAUX);
   const chevauxLive = CHEVAUX.map(c=>{ const live = LIVE[c.num]||c.cote*0.9; return {...c, coteMatin:c.cote, coteLive:live}; });
-  res.json({success:true, data:{...COURSE, chevaux:chevauxLive, partants:CHEVAUX.length}, analyses, ia_pronos: IA_PRONOS, resultat: RESULTAT, lastUpdate:COURSE.lastUpdate, nextLive:new Date(Date.now()+5*60*1000).toISOString(), mode:'V11.1 + VERIFICATEUR + 8 IA + 21 TOPS'});
+  res.json({success:true, data:{...COURSE, chevaux:chevauxLive, partants:CHEVAUX.length}, analyses, ia_pronos: IA_PRONOS, resultat: RESULTAT, lastUpdate:COURSE.lastUpdate, nextLive:new Date(Date.now()+5*60*1000).toISOString(), mode:'V11.2 + FICHIERS + 8 IA + 21 TOPS + VERIF'});
 });
 
 app.post('/api/auto-update', (req,res)=>{
   const {text, chevaux} = req.body;
-  if(chevaux && chevaux.length>=8){ CHEVAUX=chevaux; COURSE.lastUpdate=new Date().toISOString(); LIVE={}; RESULTAT=null; updateLive(); return res.json({success:true, message:`V11.1 - ${CHEVAUX.length} partants + 21 tops + 8 IA + Vérificateur reset`}); }
-  if(text){ let newC=[]; text.split('\n').forEach(line=>{ const m=line.match(/^(\d{1,2})[\s\-\.]+([A-ZÀÂÉÈÊËÏÎÔÙÛÜÇ][A-Za-zÀÂÉÈÊËÏÎÔÙÛÜÇ \-']+)/); if(m){ const num=parseInt(m[1]); const nom=m[2].trim().split(' ').slice(0,4).join(' '); if(num>=1 && num<=24 && nom.length>2 && !newC.find(c=>c.num===num)) newC.push({num, nom, driver:'', entraineur:'', gains:'', musique:'', cote:10+Math.random()*40, forme:'Bonne', classe:7, chrono:"1'13\"0", corde:num}); } }); if(newC.length>=8){ newC.sort((a,b)=>a.num-b.num); CHEVAUX=newC; COURSE.lastUpdate=new Date().toISOString(); COURSE.date=new Date().toLocaleDateString('fr-FR'); LIVE={}; RESULTAT=null; updateLive(); return res.json({success:true, message:`V11.1 - ${newC.length} partants - Vérificateur reset`}); } return res.json({success:false, message:'Colle texte Geny'}); }
+  if(chevaux && chevaux.length>=8){ CHEVAUX=chevaux; COURSE.lastUpdate=new Date().toISOString(); LIVE={}; RESULTAT=null; updateLive(); return res.json({success:true, message:`V11.2 - ${CHEVAUX.length} partants + 21 tops + 8 IA + Vérificateur reset`}); }
+  if(text){ let newC=parseTextToChevaux(text); if(newC.length>=8){ CHEVAUX=newC; COURSE.lastUpdate=new Date().toISOString(); COURSE.date=new Date().toLocaleDateString('fr-FR'); LIVE={}; RESULTAT=null; updateLive(); return res.json({success:true, message:`V11.2 - ${newC.length} partants - Vérificateur reset - via texte`}); } return res.json({success:false, message:'Colle texte Geny - min 8 chevaux'}); }
   res.json({success:false, message:'Envoie text'});
 });
 
+app.post('/api/upload-pronostic', upload.single('file'), async (req,res)=>{
+  try{
+    if(!req.file) return res.json({success:false, message:'Aucun fichier'});
+    const filePath = req.file.path;
+    const original = req.file.originalname;
+    const ext = original.toLowerCase().split('.').pop();
+    let extractedText = '';
+    let chevauxFound = [];
+
+    // If text file
+    if(['txt','csv'].includes(ext)){
+      extractedText = fs.readFileSync(filePath, 'utf8');
+      chevauxFound = parseTextToChevaux(extractedText);
+    }
+    // If pdf, try simple text extraction via regex on binary (pdfjs fallback client-side will do better)
+    else if(ext==='pdf'){
+      const buf = fs.readFileSync(filePath);
+      // very naive: extract between parentheses and numbers
+      const raw = buf.toString('latin1');
+      extractedText = raw.replace(/[^\x20-\x7E\n\rÀ-ÿ]/g,' ').slice(0,20000);
+      chevauxFound = parseTextToChevaux(raw);
+      if(chevauxFound.length<8){
+        // return to client for client-side pdf.js parsing
+        return res.json({success:false, needClientParse:true, message:'PDF détecté - utilise lecture navigateur', fileName:original, fileSize:req.file.size});
+      }
+    }
+    else if(['png','jpg','jpeg','webp'].includes(ext)){
+      // Images: client-side OCR via Tesseract.js needed
+      return res.json({success:false, needClientOCR:true, message:'Image détectée - utilise OCR navigateur', fileName:original});
+    }
+    else {
+      return res.json({success:false, message:'Format non supporté: '+ext+' - utilise txt, pdf, png, jpg'});
+    }
+
+    if(chevauxFound.length>=8){
+      CHEVAUX=chevauxFound;
+      COURSE.lastUpdate=new Date().toISOString();
+      COURSE.date=new Date().toLocaleDateString('fr-FR');
+      LIVE={}; RESULTAT=null; updateLive();
+      return res.json({success:true, message:`V11.2 - ${chevauxFound.length} partants extraits depuis fichier ${original}`, chevaux:chevauxFound, text:extractedText.slice(0,2000)});
+    } else {
+      return res.json({success:false, message:`Fichier lu mais seulement ${chevauxFound.length} chevaux trouvés - besoin 8 min`, extracted:extractedText.slice(0,1000)});
+    }
+  } catch(e){
+    res.json({success:false, message:'Erreur upload: '+e.message});
+  }
+});
+
 app.post('/api/verifier-resultat', (req,res)=>{
-  const {arrivee} = req.body; // ex: "13-10-17-9-15" ou [13,10,17,9,15]
+  const {arrivee} = req.body;
   let arr = [];
   if(typeof arrivee === 'string'){ arr = arrivee.split(/[-,\s]+/).map(n=>parseInt(n.trim())).filter(n=>!isNaN(n)); }
   else if(Array.isArray(arrivee)){ arr = arrivee; }
@@ -459,7 +524,7 @@ app.post('/api/verifier-resultat', (req,res)=>{
 });
 
 app.get('/admin', (req,res)=>res.sendFile(path.join(__dirname,'admin.html')));
-app.get('/api/health', (req,res)=>res.json({status:'V11.1 VERIF OK', partants:CHEVAUX.length, resultat:RESULTAT}));
+app.get('/api/health', (req,res)=>res.json({status:'V11.2 FICHIERS OK', partants:CHEVAUX.length, resultat:RESULTAT}));
 app.get('*', (req,res)=>res.sendFile(path.join(__dirname,'index.html')));
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, ()=>console.log('V11.1 VERIFICATEUR LIVE '+PORT));
+app.listen(PORT, ()=>console.log('V11.2 FICHIERS LIVE '+PORT));
