@@ -1,15 +1,1 @@
-{
-  "name": "turmaster-v7-auto",
-  "version": "7.0.0",
-  "description": "TurfMaster V7 AUTO - Course du jour automatique Vincennes etc",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
-    "node-cron": "^3.0.3",
-    "axios": "^1.7.2"
-  }
-}
+{"name":"turmaster-v9-auto","version":"9.0.0","main":"server.js","scripts":{"start":"node server.js"},"dependencies":{"express":"^4.18.2","cors":"^2.8.5"}}
