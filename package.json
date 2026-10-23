@@ -1,1 +1,1 @@
-{"name":"turmaster-v11-ultime-8ia-21tops","version":"11.0.0","main":"server.js","scripts":{"start":"node server.js"},"dependencies":{"express":"^4.18.2","cors":"^2.8.5"}}
+{"name":"turmaster-v11-verif","version":"11.1.0","main":"server.js","scripts":{"start":"node server.js"},"dependencies":{"express":"^4.18.2","cors":"^2.8.5"}}

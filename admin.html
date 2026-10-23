@@ -1,10 +1,36 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN V11 ULTIME 8 IA</title><style>body{background:#0f1115;color:#e6e8ee;font-family:system-ui;padding:20px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:16px;margin:12px 0} textarea{width:100%;height:200px;background:#0f1115;color:#e6e8ee;border:1px solid #2a3246;border-radius:8px;padding:12px} button{background:#f5c518;color:#000;border:0;padding:12px 20px;border-radius:8px;font-weight:700;cursor:pointer;margin:5px} .log{background:#0f1115;border:1px solid #2a3246;padding:10px;border-radius:8px;color:#6ee7b7;font-family:monospace;white-space:pre-wrap;max-height:300px;overflow:auto} .yellow{color:#f5c518} .green{background:#f5c51810;border:1px solid #f5c51830;padding:12px;border-radius:8px}</style></head><body>
-<h1 class="yellow">🟡 V11 ULTIME + 8 IA - 21 TOPS + IA</h1>
-<div class="green"><b>TOUT EST DEDANS :</b><br>
-✅ 21 Tops: Cotes Direct, Chevaux, Palmarès, Forme, Classe, Drivers, Entraineurs, Aptitude 1er/placé, Chronos, Position, Ecarts, Incontournables, Pour une place, Synthèse Pondérée/Globale, Zone ABC, Presse, Algo Perso<br>
-✅ <b>NOUVEAU: 8 IA avec 8 FAVORIS + 2 OUTSIDERS</b>: CHATGPT, Gemini, Claude, GROK, PERPLEXITY, Mistral, DeepSeek, Copilot<br>
-✅ <b>Synthèse Globale des 8 IA</b>: les plus cités + % consensus
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN V11.1 VERIFICATEUR</title><style>body{background:#0f1115;color:#e6e8ee;font-family:system-ui;padding:20px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:16px;margin:12px 0} textarea,input{width:100%;background:#0f1115;color:#e6e8ee;border:1px solid #2a3246;border-radius:8px;padding:12px} button{background:#f5c518;color:#000;border:0;padding:12px 20px;border-radius:8px;font-weight:700;cursor:pointer;margin:5px} .log{background:#0f1115;border:1px solid #2a3246;padding:10px;border-radius:8px;color:#6ee7b7;font-family:monospace;white-space:pre-wrap;max-height:400px;overflow:auto} .yellow{color:#f5c518} .green{background:#f5c51810;border:1px solid #f5c51830;padding:12px;border-radius:8px} .red{background:#ef444410;border:1px solid #ef444430;padding:12px;border-radius:8px}</style></head><body>
+<h1 class="yellow">🟡 V11.1 - 21 TOPS + 8 IA + VÉRIFICATEUR RÉSULTATS</h1>
+<div class="green"><b>TON PROCESS QUOTIDIEN (2 minutes):</b><br>
+<b>Veille 19h:</b> 1. Geny 19h → copie partants → colle ici → METTRE À JOUR<br>
+<b>Jour J après course:</b> 2. Entrée résultat ex: 13-10-9-17-15 → VÉRIFIER RÉSULTAT → Voir détails gagnés/perdus par IA et par Top
 </div>
-<div class="card"><h2 class="yellow">Mise à jour AUTO veille 19h (10s)</h2><textarea id="t" placeholder="Colle texte Geny..."></textarea><br><button onclick="autoUpdate()">🚀 METTRE À JOUR V11 ULTIME 8 IA</button><button onclick="check()">🔍 VOIR 21 TOPS + 8 IA</button><button onclick="location.href='/'">🏠 Voir site public</button><div id="log" class="log">Prêt V11 ULTIME 8 IA...</div></div>
-<script>async function autoUpdate(){const text=document.getElementById('t').value; if(!text) return alert('Colle texte'); document.getElementById('log').innerText='Génération 21 tops + 8 IA...'; const r=await fetch('/api/auto-update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})}); const j=await r.json(); document.getElementById('log').innerText=JSON.stringify(j,null,2); if(j.success) alert('✅ '+j.message);} async function check(){const r=await fetch('/api/course-du-jour'); const j=await r.json(); document.getElementById('log').innerText=JSON.stringify(j,null,2).slice(0,8000);} check();</script>
+
+<div class="card"><h2 class="yellow">ÉTAPE 1 - Veille 19h - Mise à jour partants (10s)</h2>
+<textarea id="t" placeholder="Colle texte Geny veille 19h..."></textarea><br>
+<button onclick="autoUpdate()">🚀 METTRE À JOUR PARTANTS (21 TOPS + 8 IA)</button>
+<button onclick="check()">🔍 VOIR COURSE</button>
+<button onclick="location.href='/'">🏠 Voir site public</button>
+</div>
+
+<div class="card" style="border-color:#8b5cf6"><h2 style="color:#c4b5fd">ÉTAPE 2 - Après course - Vérificateur résultats détails par détails (20s)</h2>
+<p>Après l'arrivée officielle, entre le résultat ex: <b>13-10-9-17-15</b> ou <b>13 10 9 17 15</b></p>
+<input id="res" placeholder="Ex: 13-10-9-17-15 (ordre arrivée Quinté)"></input><br><br>
+<button onclick="verif()" style="background:#8b5cf6;color:#fff">🏁 VÉRIFIER RÉSULTAT DÉTAILS PAR DÉTAILS</button>
+<button onclick="resetRes()" style="background:#222836;color:#e6e8ee">Reset résultat</button>
+<div class="red" style="margin-top:10px"><b>Ce que fait le vérificateur:</b><br>
+- Pour chaque IA (CHATGPT, Gemini...): Tiercé ✅/❌, Quarté ✅/❌, Quinté ✅/❌, nb dans 8 fav<br>
+- Pour chaque Top: Top Cotes Direct, Top Chevaux, Base Béton, Zone A/B/C<br>
+- Affichage détails sur site public en bas
+</div>
+</div>
+
+<div id="log" class="log">Prêt V11.1 Vérificateur...</div>
+
+<script>
+async function autoUpdate(){const text=document.getElementById('t').value; if(!text) return alert('Colle texte Geny'); document.getElementById('log').innerText='Maj...'; const r=await fetch('/api/auto-update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})}); const j=await r.json(); document.getElementById('log').innerText=JSON.stringify(j,null,2); if(j.success) alert('✅ '+j.message);}
+async function check(){const r=await fetch('/api/course-du-jour'); const j=await r.json(); document.getElementById('log').innerText=JSON.stringify(j,null,2).slice(0,8000);}
+async function verif(){const arrivee=document.getElementById('res').value; if(!arrivee) return alert('Entre arrivée ex: 13-10-9-17-15'); const r=await fetch('/api/verifier-resultat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({arrivee})}); const j=await r.json(); document.getElementById('log').innerText=JSON.stringify(j,null,2); if(j.success){ alert('✅ '+j.message); location.href='/'; } }
+async function resetRes(){ const r=await fetch('/api/verifier-resultat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({arrivee:[]})}); document.getElementById('log').innerText='Résultat reset'; }
+check();
+</script>
 </body></html>

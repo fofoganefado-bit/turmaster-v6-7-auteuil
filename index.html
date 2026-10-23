@@ -1,42 +1,42 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V11 ULTIME 8 IA DESIGN V6</title><style>*{box-sizing:border-box} body{margin:0;background:#0f1115;color:#e6e8ee;font-family:system-ui;min-height:100vh} .topbar{position:sticky;top:0;z-index:20;background:#0f1115E6;backdrop-filter:blur(16px);border-bottom:1px solid #2a3246;padding:12px 16px;display:flex;justify-content:space-between;align-items:center} .yellow{color:#f5c518} .wrap{max-width:1280px;margin:0 auto;padding:12px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:12px;margin:8px 0} .card.gold{border-color:#f5c51850;background:#f5c5180A} .card.ia{border-color:#8b5cf650;background:#8b5cf60A} .badge{display:inline-flex;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700} .b-yellow{background:#f5c518;color:#000} .b-green{background:#10b98120;color:#6ee7b7;border:1px solid #10b98130} .b-red{background:#ef444420;color:#fca5a5;border:1px solid #ef444430} .b-gray{background:#222836;color:#8b93a7} .b-purple{background:#8b5cf620;color:#c4b5fd;border:1px solid #8b5cf630} .row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #2a324650} .row:last-child{border:0} .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px} .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px} @media(max-width:900px){.grid3,.grid2,.grid4{grid-template-columns:1fr}} .small{font-size:11px;color:#8b93a7} a{color:#f5c518;text-decoration:none} h3{margin:0 0 6px 0;font-size:12px;color:#c9cfdd;text-transform:uppercase} .star{color:#f5c518}</style></head><body>
-<div class="topbar"><b class="yellow">V11 ULTIME - 21 TOPS + 8 IA</b><span class="small">Design V6 - 8 IA 8 fav+2 out + Synthèse</span><a href="/admin">🔧 ADMIN</a></div>
-<div class="wrap"><div id="app">Chargement 21 tops + 8 IA...</div></div>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V11.1 VERIFICATEUR + 8 IA + 21 TOPS</title><style>*{box-sizing:border-box} body{margin:0;background:#0f1115;color:#e6e8ee;font-family:system-ui;min-height:100vh} .topbar{position:sticky;top:0;z-index:20;background:#0f1115E6;backdrop-filter:blur(16px);border-bottom:1px solid #2a3246;padding:12px 16px;display:flex;justify-content:space-between;align-items:center} .yellow{color:#f5c518} .wrap{max-width:1280px;margin:0 auto;padding:12px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:12px;margin:8px 0} .card.gold{border-color:#f5c51850;background:#f5c5180A} .card.ia{border-color:#8b5cf650;background:#8b5cf60A} .card.verif{border-color:#10b98150;background:#10b9810A} .badge{display:inline-flex;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700} .b-yellow{background:#f5c518;color:#000} .b-green{background:#10b98120;color:#6ee7b7;border:1px solid #10b98130} .b-red{background:#ef444420;color:#fca5a5;border:1px solid #ef444430} .b-gray{background:#222836;color:#8b93a7} .b-purple{background:#8b5cf620;color:#c4b5fd;border:1px solid #8b5cf630} .row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #2a324650} .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px} .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px} @media(max-width:900px){.grid3,.grid2,.grid4{grid-template-columns:1fr}} .small{font-size:11px;color:#8b93a7} a{color:#f5c518;text-decoration:none} h3{margin:0 0 6px 0;font-size:12px;color:#c9cfdd;text-transform:uppercase}</style></head><body>
+<div class="topbar"><b class="yellow">V11.1 - VERIF + 21 TOPS + 8 IA</b><span class="small">Veille 19h + Verif après course</span><a href="/admin">🔧 ADMIN</a></div>
+<div class="wrap"><div id="app">Chargement...</div></div>
 <script>
 async function load(){
   const r=await fetch('/api/course-du-jour'); const j=await r.json(); const d=j.data; const a=j.analyses; const ia=j.ia_pronos;
-  let h=`<div class="card gold"><b>${d.hippodrome} ${d.date} - ${d.nom} - ${d.distance} - ${d.heure} - ${d.partants} partants</b><br><span class="small">Maj: ${new Date(d.lastUpdate).toLocaleString('fr-FR')} | Live: ${new Date(j.nextLive).toLocaleTimeString()}</span></div>`;
+  let h=`<div class="card gold"><b>${d.hippodrome} ${d.date} - ${d.nom} - ${d.partants} partants</b> - Maj: ${new Date(d.lastUpdate).toLocaleString('fr-FR')} | <a href="/admin">Admin veille + verif</a></div>`;
 
-  // IA Section
-  h+=`<div class="card ia"><h3>🤖 PRONOSTICS DES 8 IA - 8 FAVORIS + 2 OUTSIDERS + SYNTHÈSE GLOBALE IA</h3>`;
-  h+=`<div class="grid4">`;
+  if(a.verification){
+    const v=a.verification;
+    h+=`<div class="card verif"><h3>🏁 VÉRIFICATEUR RÉSULTATS - ARRIVÉE: ${v.arrivee.join('-')} - DÉTAILS PAR DÉTAILS</h3>`;
+    h+=`<div class="grid2"><div><h3>Par IA (Tiercé/Quarté/Quinté)</h3>`;
+    Object.keys(v.checkIA).forEach(name=>{
+      const c=v.checkIA[name];
+      h+=`<div class="row"><span><b>${name}</b> - ${c.dans8}</span><span><span class="badge b-yellow">${c.tierce}</span> <span class="badge b-green">${c.quarte}</span> <span class="badge b-purple">${c.quinte}</span></span></div>`;
+    });
+    h+=`</div><div><h3>Par Tops</h3>`;
+    Object.keys(v.checkTops).forEach(k=>{
+      h+=`<div class="row"><span>${k}</span><b>${v.checkTops[k]}</b></div>`;
+    });
+    h+=`<div class="small" style="margin-top:8px">Date verif: ${new Date(v.date).toLocaleString('fr-FR')}</div>`;
+    h+=`</div></div>`;
+    h+=`<p class="small" style="background:#10b98110;padding:8px;border-radius:6px">✅ Vérification détaillée: chaque IA et chaque Top est vérifié vs arrivée réelle ${v.arrivee.join('-')}</p>`;
+    h+=`</div>`;
+  }
+
+  h+=`<div class="card ia"><h3>🤖 8 IA - 8 FAV + 2 OUT + SYNTHÈSE</h3><div class="grid4">`;
   Object.keys(ia).forEach(name=>{
     const data=ia[name];
-    h+=`<div class="card" style="margin:4px 0"><h3>${name}</h3><div class="small"><b>Favoris (8):</b> ${data.fav.join(' - ')}</div><div class="small"><b>Outsiders (2):</b> ${data.outsiders.join(' - ')}</div><div class="small" style="margin-top:4px;background:#22283660;padding:4px;border-radius:4px">${data.analyse}</div></div>`;
+    h+=`<div class="card" style="margin:4px 0"><h3>${name}</h3><div class="small"><b>Fav:</b> ${data.fav.join('-')}</div><div class="small"><b>Out:</b> ${data.outsiders.join('-')}</div></div>`;
   });
-  h+=`</div>`;
-  h+=`<div class="card gold" style="margin-top:10px"><h3>🌐 SYNTHÈSE GLOBALE DES 8 IA</h3>`;
-  h+=`<div class="grid2"><div><h3>Favoris les plus cités (8 IA)</h3>${a.syntheseIA.fav.map(f=>`<div class="row"><span><span class="badge b-yellow">${f.num}</span> ${d.chevaux.find(c=>c.num===f.num)?.nom||''}</span><span><span class="badge b-green">${f.citations}/8 IA</span> ${f.pct}</span></div>`).join('')}</div><div><h3>Outsiders les plus cités</h3>${a.syntheseIA.outsiders.map(f=>`<div class="row"><span><span class="badge b-purple">${f.num}</span> ${d.chevaux.find(c=>c.num===f.num)?.nom||''}</span><span><span class="badge b-purple">${f.citations}/8 IA</span> ${f.pct}</span></div>`).join('')}</div></div>`;
-  h+=`<p class="small" style="margin-top:8px;background:#f5c51810;padding:8px;border-radius:6px">${a.syntheseIA.global}</p></div>`;
+  h+=`</div><div class="card gold" style="margin-top:8px"><h3>🌐 SYNTHÈSE GLOBALE 8 IA</h3><div class="grid2"><div>${a.syntheseIA.fav.map(f=>`<div class="row"><span class="badge b-yellow">${f.num}</span> ${d.chevaux.find(c=>c.num===f.num)?.nom||''}</span><span class="badge b-green">${f.citations}/8</span></div>`).join('')}</div><div>${a.syntheseIA.outsiders.map(f=>`<div class="row"><span class="badge b-purple">${f.num}</span> ${d.chevaux.find(c=>c.num===f.num)?.nom||''}</span><span class="badge b-purple">${f.citations}/8</span></div>`).join('')}</div></div><p class="small">${a.syntheseIA.global}</p></div></div>`;
+
+  h+=`<div class="grid3"><div><div class="card"><h3>⭐ TOP COTES DIRECT</h3>${a.topCotesDirect.map(c=>`<div class="row"><span class="badge b-yellow">${c.num}</span> ${c.nom} ${c.cote}</div>`).join('')}<h3>🐴 TOP CHEVAUX</h3>${a.topChevaux.map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="small">${c.classe}</span></div>`).join('')}</div></div>`;
+  h+=`<div><div class="card"><h3>🔥 TOP FORME</h3>${a.topForme.map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="badge b-green">${c.forme}</span></div>`).join('')}<h3>💎 TOP CLASSE</h3>${a.topClasse.map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="badge b-yellow">${c.classe}</span></div>`).join('')}</div></div>`;
+  h+=`<div><div class="card"><h3>📈 ECARTS + ZONE ABC</h3>${a.ecarts.map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span>${c.ecart}</span></div>`).join('')}<div class="row"><span>Zone A</span><b class="yellow">${a.zoneABC.A.join('-')}</b></div><div class="row"><span>Zone B</span><b>${a.zoneABC.B.join('-')}</b></div><div class="row"><span>Zone C</span><b>${a.zoneABC.C.join('-')}</b></div></div></div>`;
   h+=`</div>`;
 
-  h+=`<div class="grid3">`;
-  h+=`<div><div class="card gold"><h3>⭐ TOP COTES DIRECT</h3>${a.topCotesDirect.map(c=>`<div class="row"><span><span class="badge b-yellow">${c.num}</span> ${c.nom}</span><span class="badge b-green">${c.cote} ${c.tendance}</span></div>`).join('')}<h3 style="margin-top:8px">🐴 TOP CHEVAUX</h3>${a.topChevaux.map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="small">${c.classe}/10</span></div>`).join('')}<h3 style="margin-top:8px">🏆 TOP PALMARÈS</h3>${a.topPalmares.map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="badge b-yellow">${c.victoires} vict.</span></div>`).join('')}</div></div>`;
-  h+=`<div><div class="card"><h3>🔥 TOP FORME</h3>${a.topForme.map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="badge b-green">${c.forme}</span></div>`).join('')}<h3 style="margin-top:8px">💎 TOP CLASSE</h3>${a.topClasse.map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="badge b-yellow">${c.classe}</span> ${c.chrono}</div>`).join('')}<h3 style="margin-top:8px">🏇 TOP DRIVERS</h3>${a.topDrivers.map(t=>`<div class="row"><span>${t.driver} ${t.chevaux}</span><span class="badge b-green">${t.course}%</span></div>`).join('')}</div></div>`;
-  h+=`<div><div class="card"><h3>👨‍🏫 TOP ENTRAINEURS</h3>${a.topEntraineurs.map(t=>`<div class="row"><span>${t.entraineur}</span><span class="badge b-yellow">${t.course}%</span></div>`).join('')}<h3 style="margin-top:8px">🥇 APTITUDE 1ER</h3>${a.aptitude1er.map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="badge b-yellow">${c.aptitude} ${c.proba}</span></div>`).join('')}<h3 style="margin-top:8px">🥈 APTITUDE PLACÉ</h3>${a.aptitudePlace.slice(0,4).map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="badge b-green">${c.aptPlace} ${c.probaPlace}</span></div>`).join('')}</div></div>`;
-  h+=`</div>`;
-
-  h+=`<div class="grid3">`;
-  h+=`<div><div class="card"><h3>⏱️ TOP CHRONOS</h3>${a.topChronos.map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="badge b-yellow">${c.chrono}</span></div>`).join('')}<h3 style="margin-top:8px">📍 TOP POSITION</h3>${a.topPosition.map(c=>`<div class="row"><span>${c.num} corde ${c.corde}</span><span class="small">${c.pos}</span></div>`).join('')}<h3 style="margin-top:8px">📈 ECARTS</h3>${a.ecarts.map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="badge b-green">${c.ecart} ${c.type}</span></div>`).join('')}</div></div>`;
-  h+=`<div><div class="card gold"><h3>🔒 INCONTOURNABLES</h3>${a.incontournables.map(c=>`<div class="row"><span class="badge b-yellow">${c.num}</span> ${c.nom}</div>`).join('')}<h3 style="margin-top:8px">🎯 POUR UNE PLACE</h3>${a.pourUnePlace.map(c=>`<div class="row"><span class="badge b-yellow">${c.num}</span> ${c.nom}</div>`).join('')}<h3 style="margin-top:8px">🗺️ ZONE ABC</h3><div class="row"><span>A</span><b class="yellow">${a.zoneABC.A.join(' - ')}</b></div><div class="row"><span>B</span><b>${a.zoneABC.B.join(' - ')}</b></div><div class="row"><span>C</span><b>${a.zoneABC.C.join(' - ')}</b></div></div></div>`;
-  h+=`<div><div class="card"><h3>⚖️ SYNTHÈSE PONDÉRÉE</h3>${a.synthesePonderee.slice(0,5).map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="badge b-yellow">${c.score}</span></div>`).join('')}<h3 style="margin-top:8px">🌐 SYNTHÈSE GLOBALE</h3>${a.syntheseGlobale.map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="badge b-green">${c.score}</span></div>`).join('')}<h3 style="margin-top:8px">📰 PRESSE + ALGO PERSO</h3>${a.presse.map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="badge b-yellow">${c.presse}</span></div>`).join('')}${a.algoPerso.slice(0,3).map(c=>`<div class="row"><span>${c.num} ${c.nom}</span><span class="badge b-purple">${c.algo}</span></div>`).join('')}</div></div>`;
-  h+=`</div>`;
-
-  h+=`<div class="card"><h3>🐴 18 PARTANTS - MATIN / LIVE 5min</h3>`;
-  d.chevaux.forEach(c=>{
-    const stars = '★'.repeat(c.etoiles||3)+'☆'.repeat(5-(c.etoiles||3));
-    h+=`<div class="row" style="flex-direction:column;align-items:flex-start"><div style="width:100%;display:flex;justify-content:space-between"><span><span class="badge b-yellow">${c.num}</span> <b>${c.nom}</b> <span class="small">${c.driver} - ${c.gains} - ${c.musique} - ${c.classe}/10 - ${c.chrono}</span> <span class="star">${stars}</span></span><span><span class="badge b-gray">${c.coteMatin}</span> <span class="badge b-green">${c.coteLive} ${c.tendance}</span></span></div></div>`;
-  });
-  h+=`</div>`;
+  h+=`<div class="card"><h3>🐴 18 PARTANTS - MATIN / LIVE</h3>${d.chevaux.map(c=>`<div class="row"><span><span class="badge b-yellow">${c.num}</span> ${c.nom}</span><span><span class="badge b-gray">${c.coteMatin}</span> <span class="badge b-green">${c.coteLive}</span></span></div>`).join('')}</div>`;
 
   document.getElementById('app').innerHTML=h;
 }
