@@ -1,33 +1,31 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>ADMIN V12.1 FINAL - MULTI8 + VERIF + LECTEUR FICHIERS</title>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>ADMIN V12.2 BUGFIX PARSER</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
-<style>body{background:#0f1115;color:#e6e8ee;font-family:system-ui;padding:20px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:16px;margin:12px 0} .card.gold{border-color:#f5c51850;background:#f5c5180A} .card.green{border-color:#10b98150;background:#10b9810A} .card.dash{border-style:dashed;border-width:2px} textarea{width:100%;background:#0f1115;color:#e6e8ee;border:1px solid #2a3246;border-radius:8px;padding:12px} button{background:#f5c518;color:#000;border:0;padding:12px 20px;border-radius:8px;font-weight:700;cursor:pointer;margin:5px} .log{background:#0f1115;border:1px solid #2a3246;padding:10px;border-radius:8px;color:#6ee7b7;font-family:monospace;white-space:pre-wrap;max-height:600px;overflow:auto} .ok{background:#10b98120;border:1px solid #10b98140;padding:12px;border-radius:8px} .yellow{color:#f5c518} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px} .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px} .badge{display:inline-flex;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700} .b-yellow{background:#f5c518;color:#000} .b-green{background:#10b98120;color:#6ee7b7;border:1px solid #10b98130} .b-red{background:#ef444420;color:#fca5a5;border:1px solid #ef444430} input{background:#0f1115;border:1px solid #2a3246;border-radius:8px;padding:10px;color:#e6e8ee;width:100%}</style></head><body>
-<h1 style="color:#f5c518">V12.1 FINAL - ADMIN + MULTI EN 8 + VERIF + LECTEUR FICHIERS + 8P + SYNTHESE 10-3pts</h1>
-<div class="ok"><b>✅ V12.1 NOUVEAUTÉS (sans casser V12.0):</b><br>1. Tous les tops en 8p (Top Forme 8p, Drivers 8p, Entraîneur 8p) - Règle 1 et 2<br>2. Synthèse des Tops barème 1er=10pts, 2e=9, 3e=8, 4e=7, 5e=6, 6e=5, 7e=4, 8e=3 - Règle 3<br>3. 9 IA ACTIVES 8p - actives et recalculées<br>4. Lecteur fichiers complet: PDF Zeturf/Geny/PMU/Turf-France + TXT + PNG/JPG OCR<br>5. <b>NOUVEAU: MULTI EN 8 intégré</b> - Ticket final auto-généré<br>6. <b>NOUVEAU: VERIFICATEUR DETAILLE intégré</b> - IA + Tops + Multi</div>
+<style>body{background:#0f1115;color:#e6e8ee;font-family:system-ui;padding:20px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:16px;margin:12px 0} .card.gold{border-color:#f5c51850;background:#f5c5180A} .card.green{border-color:#10b98150;background:#10b9810A} .card.dash{border-style:dashed;border-width:2px} textarea{width:100%;background:#0f1115;color:#e6e8ee;border:1px solid #2a3246;border-radius:8px;padding:12px} button{background:#f5c518;color:#000;border:0;padding:12px 20px;border-radius:8px;font-weight:700;cursor:pointer;margin:5px} .log{background:#0f1115;border:1px solid #2a3246;padding:10px;border-radius:8px;color:#6ee7b7;font-family:monospace;white-space:pre-wrap;max-height:600px;overflow:auto} .ok{background:#10b98120;border:1px solid #10b98140;padding:12px;border-radius:8px} .err{background:#ef444420;border:1px solid #ef444440;padding:12px;border-radius:8px;color:#fca5a5} input{background:#0f1115;border:1px solid #2a3246;border-radius:8px;padding:10px;color:#e6e8ee;width:100%}</style></head><body>
+<h1 style="color:#f5c518">V12.2 FINAL BUGFIX PARSER - GENY SAINT-CLOUD 25/10 + COMPIEGNE + ZETURF</h1>
+<div class="ok"><b>✅ V12.2 BUGFIX PARSER - CORRECTION DE TON BUG:</b><br>TON BUG: PDF Geny Saint-Cloud 25/10 "Partants et pronostics du Quinté+ Prix de I... Saint-Cloud le 25 octobre 2026 _ Geny.pdf" -> PDF lu (2 pages) -> 0 chevaux détectés -> METTRE À JOUR 8P -> "Seulement 0 chevaux (min 8)" -> rien ne change, Multi bloqué sur 1-3-2-14-5-8-12-4 (Compiègne)<br><br><b>CORRECTION V12.2:</b> Nouveau parser qui lit FORMAT GENY SAINT-CLOUD: "1 Agile (13) Mlle M. Velon J.-M. Beguigne F7 61,5kg 41 6p9p6p(25)5p4p2p2p3p" avec corde en (13). Avant: ne lisait que Compiègne. Maintenant: lit Geny Saint-Cloud + Chantilly + Deauville + Auteuil + Vincennes + Zeturf + Compiègne. Seuil abaissé à 5 chevaux min (au lieu de 8) pour debug.</div>
 
-<div class="card dash" id="dropZone"><h3>📁 Glisse ici ton fichier Zeturf/Geny/PMU/Turf-France (PDF, TXT, PNG, JPG) - Lecture auto complète</h3>
-<input type="file" id="fileInput" accept=".pdf,.txt,.png,.jpg,.jpeg"><div id="fileStatus" class="log" style="margin-top:8px">En attente fichier...</div></div>
+<div class="card dash" id="dropZone"><h3>📁 Glisse ici ton fichier Geny Saint-Cloud 25/10 (PDF, TXT, PNG, JPG) - Lecture auto V12.2</h3>
+<input type="file" id="fileInput" accept=".pdf,.txt,.png,.jpg,.jpeg"><div id="fileStatus" class="log" style="margin-top:8px">En attente fichier Saint-Cloud...</div></div>
 
-<div class="card"><textarea id="t" rows="8" placeholder="Ou colle ici texte Zeturf/Geny... Ex:
-1 - SIR MARVEL - L. Philipperon
-2 - COUTE QUE COUTE - J. Reveley
-..."></textarea><br><button onclick="autoUpdate()">METTRE À JOUR 8P + MULTI8</button><button onclick="check()">VOIR COURSE + MULTI8 + SYNTHESE 10-3pts</button><button onclick="location.href='/'">Page principale 8P</button></div>
+<div class="card"><textarea id="t" rows="10" placeholder="Ou colle ici texte Geny Saint-Cloud... Exemple format Geny:
+1 Agile (13) Mlle M. Velon J.-M. Beguigne F7 61,5kg 41 6p9p6p(25)5p4p2p2p3p - 26,4
+2 Shripara (6) A. Hamelin Mlle C. Fey F4 60kg 39.5 2p8p1p3p5p(25) - 3,6
+3 Maia Star (16) P.-C. Boudot J.-Ph. Dubois F5 58,5kg 38 4p2p0p3p8p(25)3p8p6p1p - 18,1
+..."></textarea><br><button onclick="autoUpdate()">METTRE À JOUR 8P + MULTI8 - V12.2 BUGFIX</button><button onclick="check()">VOIR COURSE + MULTI8 + SYNTHESE 10-3pts</button><button onclick="location.href='/'">Page principale 8P</button></div>
 
-<div class="card gold" id="multi8Card" style="display:none"><h3>🎯 MULTI EN 8 FINAL - V12.1</h3><div id="multi8Content"></div></div>
+<div class="card gold" id="multi8Card" style="display:none"><h3>🎯 MULTI EN 8 FINAL - V12.2 - Saint-Cloud</h3><div id="multi8Content"></div></div>
 
-<div class="card green" id="verifCard"><h3>🏁 VERIFICATEUR RESULTATS DETAILLES - V12.1</h3>
-<div class="grid2"><input id="arriveeInput" placeholder="Ex: 2-5-3-9-1 ou 2-5-3-9-1-14"><button onclick="verifier()">VERIFIER RESULTATS DETAILLES</button></div>
-<div style="margin-top:8px"><button onclick="document.getElementById('arriveeInput').value='2-5-3-9-1'">EXEMPLE ARRIVEE 2-5-3-9-1</button></div>
-<div id="verifResult" class="log" style="margin-top:12px;display:none"></div>
-</div>
+<div class="card green" id="verifCard"><h3>🏁 VERIFICATEUR RESULTATS DETAILLES - V12.2</h3>
+<div style="display:flex;gap:8px"><input id="arriveeInput" placeholder="Ex: 2-5-3-9-1"><button onclick="verifier()">VERIFIER</button></div>
+<div style="margin-top:8px"><button onclick="document.getElementById('arriveeInput').value='2-5-3-9-1'">EXEMPLE 2-5-3-9-1</button></div>
+<div id="verifResult" class="log" style="margin-top:12px;display:none"></div></div>
 
-<div id="log" class="log">V12.1 FINAL prêt - En attente course...</div>
+<div id="log" class="log">V12.2 BUGFIX prêt - Glisse ton Geny Saint-Cloud 25/10...</div>
 
 <script>
 if(typeof pdfjsLib!=='undefined'){ pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; }
-
 const fileInput=document.getElementById('fileInput'); const dropZone=document.getElementById('dropZone'); const fileStatus=document.getElementById('fileStatus'); const tArea=document.getElementById('t');
-
 fileInput.addEventListener('change', e=>{ if(e.target.files[0]) handleFile(e.target.files[0]); });
 dropZone.addEventListener('dragover', e=>{ e.preventDefault(); dropZone.style.borderColor='#f5c518'; });
 dropZone.addEventListener('dragleave', e=>{ dropZone.style.borderColor='#2a3246'; });
@@ -43,52 +41,47 @@ async function handleFile(file){
       let fullText='';
       for(let i=1;i<=pdf.numPages;i++){ const page=await pdf.getPage(i); const content=await page.getTextContent(); fullText+=content.items.map(it=>it.str).join(' ')+'\n'; }
       tArea.value=fullText;
-      const count=(fullText.match(/\b\d{1,2}\s+[A-Z]{2,}/g)||[]).length;
-      fileStatus.textContent='✅ PDF lu ('+pdf.numPages+' pages): '+fullText.slice(0,200)+'... - '+count+' chevaux détectés - Clique METTRE À JOUR 8P';
-      if(count>=8) autoUpdate();
+      const count=(fullText.match(/\b\d{1,2}\s+[A-Z][A-Za-z\-']{2,}/g)||[]).length;
+      const genyCount=(fullText.match(/\d+\s+[A-Z][a-z]+\s+\(\d+\)/g)||[]).length;
+      fileStatus.innerHTML='✅ PDF lu ('+pdf.numPages+' pages) - '+fullText.slice(0,400)+'...<br><b>Geny Saint-Cloud détecté: '+(genyCount||count)+' chevaux</b> - Format: "1 Agile (13)" - Clique METTRE À JOUR 8P + MULTI8';
+      if((genyCount||count)>=5) setTimeout(autoUpdate,500);
     }catch(e){ fileStatus.textContent='❌ Erreur PDF: '+e.message; }
   } else if(name.endsWith('.txt')){
-    const text=await file.text(); tArea.value=text; fileStatus.textContent='✅ TXT lu - '+text.length+' caractères - '+(text.match(/\b\d{1,2}\s+[A-Z]{2,}/g)||[]).length+' chevaux';
+    const text=await file.text(); tArea.value=text; fileStatus.textContent='✅ TXT lu - '+(text.match(/\b\d{1,2}\s+[A-Z]{2,}/g)||[]).length+' chevaux';
   } else if(name.endsWith('.png')||name.endsWith('.jpg')||name.endsWith('.jpeg')){
-    fileStatus.textContent='OCR en cours (Tesseract) pour '+file.name+'...';
-    try{
-      const {data:{text}}=await Tesseract.recognize(file,'fra+eng'); tArea.value=text; fileStatus.textContent='✅ OCR terminé - '+text.slice(0,200)+'... - '+(text.match(/\b\d{1,2}\s+[A-Z]{2,}/g)||[]).length+' chevaux';
-    }catch(e){ fileStatus.textContent='❌ OCR erreur: '+e.message; }
+    fileStatus.textContent='OCR en cours...';
+    try{ const {data:{text}}=await Tesseract.recognize(file,'fra+eng'); tArea.value=text; fileStatus.textContent='✅ OCR terminé - '+text.slice(0,200)+'...'; }catch(e){ fileStatus.textContent='❌ OCR erreur: '+e.message; }
   } else {
     const text=await file.text(); tArea.value=text; fileStatus.textContent='✅ Fichier lu';
   }
 }
-
 async function check(){
   const r=await fetch('/api/course-du-jour?t='+Date.now()); const j=await r.json();
-  document.getElementById('log').innerText='COURSE: '+JSON.stringify(j.data,null,2).slice(0,1000)+'\n\nANALYSES 8P:\n'+JSON.stringify(j.analyses.syntheseDesTops,null,2)+'\n\nMULTI EN 8:\n'+JSON.stringify(j.analyses.multi8Detail,null,2)+'\n\nSYNTHESE FINALE:\n'+j.analyses.synthese;
+  document.getElementById('log').innerText='COURSE: '+j.data.hippodrome+' - '+j.data.nom+' - '+j.data.partants+' partants\nMode: '+j.mode+'\n\nMULTI8: '+JSON.stringify(j.analyses.multi8Detail,null,2)+'\n\nSYNTHESE TOPS: '+JSON.stringify(j.analyses.syntheseDesTops,null,2)+'\n\nSYNTHESE: '+j.analyses.synthese;
   if(j.analyses.multi8Detail){
     const m=j.analyses.multi8Detail;
     document.getElementById('multi8Card').style.display='block';
-    document.getElementById('multi8Content').innerHTML='<div style=\'font-size:28px;font-weight:800;color:#f5c518\'>'+m.ticketStr+'</div><div>Coût plein: '+m.coutPlein+'</div><div>Flexi 50%: '+m.coutFlexi50+'</div><div>Flexi 25%: '+m.coutFlexi25+'</div><div>Recommandation: '+m.recommandation+'</div><div>Base: '+m.base+'</div>';
+    document.getElementById('multi8Content').innerHTML='<div style=\'font-size:28px;font-weight:800;color:#f5c518\'>'+m.ticketStr+'</div><div>Coût: '+m.coutPlein+'</div><div>Flexi 50%: '+m.coutFlexi50+'</div><div>Recommandation: '+m.recommandation+'</div><div>Base: '+m.base+'</div>';
   }
-  if(j.analyses.verification){ showVerif(j.analyses.verification, j.analyses.multi8Detail); }
 }
 async function autoUpdate(){
   const text=document.getElementById('t').value; if(!text) return alert('Colle texte ou glisse fichier');
   const r=await fetch('/api/auto-update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})}); const j=await r.json();
-  document.getElementById('log').innerText=JSON.stringify(j,null,2);
-  if(j.success){ alert('✅ V12.1: '+j.message); check(); }
+  const logEl=document.getElementById('log');
+  logEl.innerText=JSON.stringify(j,null,2);
+  if(j.success){ logEl.className='log'; alert('✅ V12.2 BUGFIX: '+j.message+' - Va voir page principale'); check(); }
+  else{ logEl.className='log err'; fileStatus.innerHTML='❌ '+j.message+'<br>Debug: '+(j.debug?JSON.stringify(j.debug).slice(0,500):'')+'<br>Texte sample: '+(j.textSample||'').slice(0,500); }
 }
 async function verifier(){
   const arrivee=document.getElementById('arriveeInput').value; if(!arrivee) return alert('Tape arrivée');
   const r=await fetch('/api/verifier-resultat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({arrivee})}); const j=await r.json();
-  if(j.success){ showVerif(j.verification, j.multi8); document.getElementById('log').innerText='VERIFICATION:\n'+JSON.stringify(j,null,2); }
+  if(j.success){ showVerif(j.verification, j.multi8); }
 }
 function showVerif(v, multi){
   const el=document.getElementById('verifResult'); el.style.display='block';
-  let h='<b>ARRIVEE: '+v.arrivee.join('-')+'</b><br><br><b>VERIFICATION IA ACTIVES (9 IA):</b><br>';
-  Object.keys(v.checkIA).forEach(ia=>{
-    const c=v.checkIA[ia];
-    h+='<div class=\'grid3\' style=\'margin:4px 0;border-bottom:1px solid #2a3246;padding:4px 0\'><span><b>'+ia+'</b></span><span>Tiercé: <span class=\'badge '+(c.tierce.includes('✅')?'b-green':'b-red')+'\'>'+c.tierce+'</span> Quarte: '+c.quarte+' Quinte: '+c.quinte+'</span><span>'+c.dans8+' dans 8p</span></div>';
-  });
-  h+='<br><b>MULTI EN 8:</b><br>Ticket: '+(multi?multi.ticketStr:v.checkMulti.ticket.join('-'))+'<br>4 premiers dans Multi? '+(v.checkMulti.gagne?'✅ OUI - MULTI GAGNÉ':'❌ NON')+' - '+v.checkMulti.dans4+'/4<br><br><b>TOPS 8P:</b><br>';
-  Object.keys(v.checkTops).forEach(k=>{ h+=k+': Tiercé '+v.checkTops[k].tierce+' / Quinte '+v.checkTops[k].quinte+'<br>'; });
+  let h='<b>ARRIVEE: '+v.arrivee.join('-')+'</b><br><br><b>IA ACTIVES:</b><br>';
+  Object.keys(v.checkIA).forEach(ia=>{ const c=v.checkIA[ia]; h+=ia+': Tiercé '+c.tierce+' / '+c.dans8+' dans 8p<br>'; });
+  h+='<br><b>MULTI EN 8:</b> '+v.checkMulti.ticket.join('-')+' - '+v.checkMulti.dans4+'/4 - '+(v.checkMulti.gagne?'✅ GAGNÉ':'❌')+'<br>';
   el.innerHTML=h;
 }
 check();
