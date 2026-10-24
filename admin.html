@@ -1,96 +1,11 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ADMIN V11.5 BUGFIX</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-<style>body{background:#0f1115;color:#e6e8ee;font-family:system-ui;padding:20px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:16px;margin:12px 0} textarea,input{width:100%;background:#0f1115;color:#e6e8ee;border:1px solid #2a3246;border-radius:8px;padding:12px} button{background:#f5c518;color:#000;border:0;padding:12px 20px;border-radius:8px;font-weight:700;cursor:pointer;margin:5px} .log{background:#0f1115;border:1px solid #2a3246;padding:10px;border-radius:8px;color:#6ee7b7;font-family:monospace;white-space:pre-wrap;max-height:600px;overflow:auto} .yellow{color:#f5c518} .green{background:#f5c51810;border:1px solid #f5c51830;padding:12px;border-radius:8px} .drop{border:2px dashed #f5c51850;padding:20px;text-align:center;border-radius:12px;background:#f5c51805;cursor:pointer} .drop.dragover{border-color:#f5c518;background:#f5c51815} .ok{background:#10b98120;border:1px solid #10b98140;padding:12px;border-radius:8px;color:#6ee7b7} .red{background:#ef444410;border:1px solid #ef444430;padding:12px;border-radius:8px;color:#fca5a5} .purple{background:#8b5cf620;border:1px solid #8b5cf640;padding:12px;border-radius:8px} </style></head><body>
-<h1 class="yellow">🟡 V11.5 BUGFIX - CORRECTION TES 2 BUGS</h1>
-
-<div class="red"><b>🐛 Bugs que tu as trouvés en V11.2 :</b><br>
-1. Tu colles pronostics → message "V11.2 15p Vérificateur reset via text" ✅ mais page principale montre encore les fichiers de vendredi ❌<br>
-2. Raison: V11.2 ne PERSISTAIT pas + CACHE navigateur → Render redémarrait et perdait tes partants + navigateur gardait ancienne page en cache</div>
-
-<div class="ok"><b>✅ FIX V11.5 :</b><br>
-1. <b>PERSISTANCE</b> : Tes partants sont maintenant sauvegardés dans fichier <code>data_persist.json</code> sur Render → même si Render redémarre, tes partants restent !<br>
-2. <b>NO CACHE</b> : Headers <code>no-store, no-cache</code> → page principale va toujours chercher les vrais partants, pas l'ancien cache vendredi<br>
-3. <b>DEBUG</b> : Nouveau bouton debug + /api/debug pour voir ce qui est vraiment sauvé<br>
-4. <b>FORCE REFRESH</b> : Après mise à jour, fais Ctrl+F5 sur page principale</div>
-
-<div class="card"><h2 class="yellow">ÉTAPE 1 - Veille 19h - UNIVERSAL + BUGFIX</h2>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-<div>
-<h3 style="color:#ff6b00">📎 Méthode A - Fichiers (TOUS FORMATS)</h3>
-<div id="drop" class="drop">
-📁 Glisse ici ton fichier<br>
-<small>Zeturf PDF, Geny PDF, PMU PDF, Turf-France PDF, TXT, PNG/JPG</small><br>
-<input type="file" id="fileInput" accept=".pdf,.txt,.csv,.png,.jpg,.jpeg,.webp" style="margin-top:10px">
-<div id="fileStatus"></div>
-</div>
-</div>
-<div>
-<h3 class="yellow">📝 Méthode B - Texte (TOUS FORMATS)</h3>
-<textarea id="t" rows="10" placeholder="Colle texte Zeturf, Geny, PMU, Turf-France..."></textarea><br>
-<button onclick="autoUpdate()">🚀 METTRE À JOUR (BUGFIX + PERSIST)</button>
-</div>
-</div>
-<div style="margin-top:12px">
-<button onclick="check()" style="background:#222836;color:#e6e8ee">🔍 VOIR COURSE + DEBUG</button>
-<button onclick="debugInfo()" style="background:#8b5cf6;color:#fff">🐛 DEBUG PERSISTANCE</button>
-<button onclick="location.href='/'">🏠 Page principale (Ctrl+F5 après maj !)</button>
-<button onclick="resetData()" style="background:#ef4444;color:#fff">🔄 RESET COMPIEGNE 24/10</button>
-</div>
-</div>
-
-<div class="card" style="border-color:#8b5cf6"><h2 style="color:#c4b5fd">ÉTAPE 2 - Vérificateur</h2>
-<input id="res" placeholder="Ex: 2-5-3-9-1"></input><br><br>
-<button onclick="verif()" style="background:#8b5cf6;color:#fff">🏁 VÉRIFIER RÉSULTAT</button>
-</div>
-
-<div id="log" class="log">V11.5 BUGFIX prêt - PERSIST + NO CACHE - Colle tes pronostics maintenant...</div>
-
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>ADMIN V11.6 FULL</title><style>body{background:#0f1115;color:#e6e8ee;font-family:system-ui;padding:20px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:16px;margin:12px 0} textarea,input{width:100%;background:#0f1115;color:#e6e8ee;border:1px solid #2a3246;border-radius:8px;padding:12px} button{background:#f5c518;color:#000;border:0;padding:12px 20px;border-radius:8px;font-weight:700;cursor:pointer;margin:5px} .log{background:#0f1115;border:1px solid #2a3246;padding:10px;border-radius:8px;color:#6ee7b7;font-family:monospace;white-space:pre-wrap;max-height:500px;overflow:auto}</style></head><body>
+<h1 style="color:#f5c518">V11.6 FULL ANALYSES - 21 TOPS + SYNTHESES</h1>
+<div class="card"><h2>ÉTAPE 1 - Mise à jour partants</h2><textarea id="t" rows="8" placeholder="Colle texte Zeturf/Geny..."></textarea><br><button onclick="autoUpdate()">METTRE À JOUR FULL</button><button onclick="check()">VOIR COURSE</button><button onclick="location.href='/'">Page principale FULL</button></div>
+<div class="card"><h2>ÉTAPE 2 - Vérificateur</h2><input id="res" placeholder="Ex: 2-5-3-9-1"><button onclick="verif()">VÉRIFIER</button></div>
+<div id="log" class="log">V11.6 FULL prêt</div>
 <script>
-pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-async function check(){const r=await fetch('/api/course-du-jour?t='+Date.now()); const j=await r.json(); document.getElementById('log').innerText=JSON.stringify(j,null,2).slice(0,12000);}
-async function debugInfo(){const r=await fetch('/api/debug?t='+Date.now()); const j=await r.json(); document.getElementById('log').innerText='DEBUG V11.5 BUGFIX:\n'+JSON.stringify(j,null,2); alert('DEBUG:\nPartants: '+j.chevaux+'\nCourse: '+j.course.nom+'\nLastUpdate: '+j.course.lastUpdate+'\nPersist file exists: '+j.fileExists+'\nSavedAt: '+j.fileContent);}
-async function resetData(){ if(!confirm('Reset Compiègne 24/10 ?')) return; const r=await fetch('/api/reset',{method:'POST'}); const j=await r.json(); alert(j.message); check(); }
-async function autoUpdate(){
-  const text=document.getElementById('t').value; 
-  if(!text) return alert('Colle texte'); 
-  document.getElementById('log').innerText='V11.5 BUGFIX - Mise à jour + PERSIST + NO CACHE...';
-  const r=await fetch('/api/auto-update?t='+Date.now(),{method:'POST',headers:{'Content-Type':'application/json','Cache-Control':'no-cache'},body:JSON.stringify({text})}); 
-  const j=await r.json(); 
-  document.getElementById('log').innerText=JSON.stringify(j,null,2);
-  if(j.success){ 
-    alert('✅ V11.5 BUGFIX: '+j.message+'\n\nIMPORTANT: Maintenant va sur page principale et fais Ctrl+F5 (force refresh) pour voir les nouveaux partants !\n\nAvant: tu voyais fichiers de vendredi (cache)\nMaintenant: NO CACHE + PERSIST'); 
-    // Auto redirect avec cache bust
-    setTimeout(()=>{ window.open('/?t='+Date.now(), '_blank'); }, 1000);
-  } else alert('❌ '+j.message+'\nDebug: '+JSON.stringify(j.debug||''));
-}
-async function handleFile(file){
-  const log=document.getElementById('log'); const status=document.getElementById('fileStatus');
-  status.innerText='V11.5 lecture '+file.name+'...'; log.innerText='V11.5 UNIVERSAL lecture '+file.name+'...';
-  if(file.type==='application/pdf' || file.name.toLowerCase().endsWith('.pdf')){
-    try{
-      const buf=await file.arrayBuffer(); const pdf=await pdfjsLib.getDocument({data:buf}).promise; let fullText='';
-      for(let i=1;i<=pdf.numPages;i++){ const page=await pdf.getPage(i); const content=await page.getTextContent(); fullText+=content.items.map(it=>it.str).join(' ')+'\n'; }
-      log.innerText='PDF lu '+pdf.numPages+' pages - Envoi V11.5 BUGFIX...\n'+fullText.slice(0,3000);
-      const r=await fetch('/api/auto-update?t='+Date.now(),{method:'POST',headers:{'Content-Type':'application/json','Cache-Control':'no-cache'},body:JSON.stringify({text:fullText})});
-      const j=await r.json(); log.innerText+='\n\nAPI V11.5: '+JSON.stringify(j,null,2);
-      if(j.success) { alert('✅ V11.5 PDF '+j.source+': '+j.message+'\nFais Ctrl+F5 sur page principale !'); status.innerText='✅ '+j.source; setTimeout(()=>{ window.open('/?t='+Date.now(), '_blank'); }, 1000); }
-      else { status.innerText='❌ '+j.message; }
-      return;
-    }catch(e){ log.innerText='Erreur PDF: '+e.message; return; }
-  }
-  if(file.type.startsWith('image/')){
-    try{ status.innerText='OCR...'; log.innerText='OCR '+file.name+'...'; const {data:{text}} = await Tesseract.recognize(file, 'fra+eng'); log.innerText='OCR:\n'+text.slice(0,4000); const r=await fetch('/api/auto-update?t='+Date.now(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})}); const j=await r.json(); log.innerText+='\nAPI: '+JSON.stringify(j,null,2); if(j.success) { alert('✅ OCR '+j.source+': '+j.message); window.open('/?t='+Date.now(), '_blank'); } return; }catch(e){ log.innerText='Erreur OCR: '+e.message; return; }
-  }
-  const text=await file.text(); log.innerText='TXT:\n'+text.slice(0,3000); const r=await fetch('/api/auto-update?t='+Date.now(),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})}); const j=await r.json(); log.innerText+='\nAPI: '+JSON.stringify(j,null,2); if(j.success) { alert('✅ '+j.source+': '+j.message); window.open('/?t='+Date.now(), '_blank'); }
-}
-const drop=document.getElementById('drop'); const input=document.getElementById('fileInput');
-drop.addEventListener('click',()=>input.click());
-drop.addEventListener('dragover',e=>{e.preventDefault(); drop.classList.add('dragover');});
-drop.addEventListener('dragleave',()=>drop.classList.remove('dragover'));
-drop.addEventListener('drop',e=>{e.preventDefault(); drop.classList.remove('dragover'); if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);});
-input.addEventListener('change',e=>{ if(e.target.files[0]) handleFile(e.target.files[0]); });
-async function verif(){const arrivee=document.getElementById('res').value; if(!arrivee) return alert('Entre arrivée'); const r=await fetch('/api/verifier-resultat?t='+Date.now(),{method:'POST',headers:{'Content-Type':'application/json','Cache-Control':'no-cache'},body:JSON.stringify({arrivee})}); const j=await r.json(); document.getElementById('log').innerText=JSON.stringify(j,null,2); if(j.success){ alert('✅ '+j.message); location.href='/?t='+Date.now(); } }
+async function check(){const r=await fetch('/api/course-du-jour?t='+Date.now()); const j=await r.json(); document.getElementById('log').innerText=JSON.stringify(j.analyses,null,2).slice(0,15000);}
+async function autoUpdate(){const text=document.getElementById('t').value; if(!text) return alert('Colle texte'); const r=await fetch('/api/auto-update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})}); const j=await r.json(); document.getElementById('log').innerText=JSON.stringify(j,null,2); if(j.success){ alert('✅ '+j.message); location.href='/?t='+Date.now(); } }
+async function verif(){const arrivee=document.getElementById('res').value; const r=await fetch('/api/verifier-resultat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({arrivee})}); const j=await r.json(); document.getElementById('log').innerText=JSON.stringify(j,null,2); if(j.success) location.href='/?t='+Date.now(); }
 check();
-</script>
-</body></html>
+</script></body></html>
