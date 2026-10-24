@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V12.0 FINAL - 8P TOUS TOPS + SYNTHESE 10-3pts</title><style>*{box-sizing:border-box} body{margin:0;background:#0f1115;color:#e6e8ee;font-family:system-ui} .topbar{position:sticky;top:0;z-index:20;background:#0f1115E6;border-bottom:1px solid #2a3246;padding:12px 16px;display:flex;justify-content:space-between} .yellow{color:#f5c518} .wrap{max-width:1280px;margin:0 auto;padding:12px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:12px;margin:8px 0} .card.gold{border-color:#f5c51850;background:#f5c5180A} .card.ia{border-color:#8b5cf650;background:#8b5cf60A} .card.top{border-color:#2a3246} .badge{display:inline-flex;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700} .b-yellow{background:#f5c518;color:#000} .b-green{background:#10b98120;color:#6ee7b7;border:1px solid #10b98130} .b-gray{background:#222836;color:#8b93a7} .b-orange{background:#ff6b00;color:#fff} .b-purple{background:#8b5cf620;color:#c4b5fd} .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #2a324650} .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px} .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px} @media(max-width:900px){.grid3,.grid4{grid-template-columns:1fr}} .small{font-size:11px;color:#8b93a7} a{color:#f5c518;text-decoration:none} h3{margin:0 0 6px 0;font-size:11px;color:#c9cfdd;text-transform:uppercase} .pts{color:#f5c518;font-weight:700}</style></head><body>
-<div class="topbar"><b class="yellow">V12.0 FINAL STABLE</b> <span>8P TOUS TOPS + SYNTHESE 10-3pts</span><a href="/admin">ADMIN FINAL</a></div>
-<div class="wrap"><div id="app">Chargement V12 FINAL 8P...</div></div>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V12.1 FINAL - ADMIN+MULTI8+VERIF+8P+10-3pts</title><style>*{box-sizing:border-box} body{margin:0;background:#0f1115;color:#e6e8ee;font-family:system-ui} .topbar{position:sticky;top:0;z-index:20;background:#0f1115E6;border-bottom:1px solid #2a3246;padding:12px 16px;display:flex;justify-content:space-between} .yellow{color:#f5c518} .wrap{max-width:1280px;margin:0 auto;padding:12px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:12px;margin:8px 0} .card.gold{border-color:#f5c51850;background:#f5c5180A} .card.green{border-color:#10b98150;background:#10b9810A} .card.ia{border-color:#8b5cf650;background:#8b5cf60A} .card.top{border-color:#2a3246} .badge{display:inline-flex;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700} .b-yellow{background:#f5c518;color:#000} .b-green{background:#10b98120;color:#6ee7b7;border:1px solid #10b98130} .b-gray{background:#222836;color:#8b93a7} .b-orange{background:#ff6b00;color:#fff} .b-purple{background:#8b5cf620;color:#c4b5fd} .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #2a324650} .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px} .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px} @media(max-width:900px){.grid3,.grid4{grid-template-columns:1fr}} .small{font-size:11px;color:#8b93a7} a{color:#f5c518;text-decoration:none} h3{margin:0 0 6px 0;font-size:11px;color:#c9cfdd;text-transform:uppercase} .pts{color:#f5c518;font-weight:700}</style></head><body>
+<div class="topbar"><b class="yellow">V12.1 FINAL</b> <span>ADMIN+MULTI8+VERIF+8P+10-3pts</span><a href="/admin">ADMIN V12.1 MULTI8</a></div>
+<div class="wrap"><div id="app">Chargement V12.1 FINAL...</div></div>
 <script>
 async function load(){
   const r=await fetch('/api/course-du-jour?t='+Date.now(), {cache:'no-store'}); 
@@ -8,57 +8,57 @@ async function load(){
   const d=j.data; const a=j.analyses; const ia=j.ia_pronos;
   let h=`<div class="card gold"><b>${d.hippodrome} ${d.date} - ${d.nom}</b> - ${d.heure} - ${d.allocation}<br>Source: ${d.source} - Maj: ${new Date(d.lastUpdate).toLocaleString('fr-FR')} - ${d.partants} partants - Mode: ${j.mode}</div>`;
 
-  // SYNTHESE DES TOPS avec barème 10-3pts
-  h+=`<div class="card gold" style="border-color:#f5c518"><h3>🏆 SYNTHESE DES TOPS - Barème: 1er=10pts, 2e=9, 3e=8, 4e=7, 5e=6, 6e=5, 7e=4, 8e=3 - Compilation de TOUS les tops</h3><div class="grid4">`;
-  a.syntheseDesTops.slice(0,8).forEach((s,i)=>{
-    const pts = [10,9,8,7,6,5,4,3][i]||3;
-    h+=`<div class="card top"><div><span class="badge b-yellow">${s.num}</span> <b>${s.nom}</b> <span class="pts">${s.points} pts</span></div><div class="small">Place dans synthèse: ${i+1}e - Barème: ${baremeLabel(i)} - Total: ${s.points} pts sur tous les tops</div></div>`;
-  });
-  h+=`</div><div class="small"><b>Détail calcul:</b> Chaque top apporte 10pts au 1er, 9pts au 2e, 8pts au 3e, 7pts au 4e, 6pts au 5e, 5pts au 6e, 4pts au 7e, 3pts au 8e. Somme de ${Object.keys(a).filter(k=>k.startsWith('top')).length} tops = Score final. | ${a.synthese}</div></div>`;
+  // MULTI EN 8 FINAL - NOUVEAU
+  h+=`<div class="card gold" style="border:2px solid #f5c518"><h3>🎯 MULTI EN 8 FINAL - V12.1 - Ticket généré automatiquement</h3><div style="font-size:32px;font-weight:900;color:#f5c518;text-align:center">${a.multi8Detail.ticketStr}</div><div class="grid3" style="margin-top:8px"><div><b>Coût plein:</b> ${a.multi8Detail.coutPlein}</div><div><b>Flexi 50%:</b> ${a.multi8Detail.coutFlexi50}</div><div><b>Flexi 25%:</b> ${a.multi8Detail.coutFlexi25}</div></div><div style="text-align:center;margin-top:6px"><b>${a.multi8Detail.recommandation}</b> | Base: ${a.multi8Detail.base}</div></div>`;
 
-  function baremeLabel(i){ return [10,9,8,7,6,5,4,3][i]+'pts'; }
+  // SYNTHESE DES TOPS
+  h+=`<div class="card gold"><h3>🏆 SYNTHESE DES TOPS - Barème: 1er=10pts, 2e=9, 3e=8, 4e=7, 5e=6, 6e=5, 7e=4, 8e=3</h3><div class="grid4">`;
+  a.syntheseDesTops.slice(0,8).forEach((s,i)=>{ h+=`<div class="card top"><div><span class="badge b-yellow">${s.num}</span> <b>${s.nom}</b> <span class="pts">${s.points} pts</span></div><div class="small">Place: ${i+1}e - ${[10,9,8,7,6,5,4,3][i]}pts</div></div>`; });
+  h+=`</div><div class="small">${a.synthese}</div></div>`;
 
   // IA ACTIVES
   h+=`<div class="card ia"><h3>🤖 9 IA ACTIVES - 8P</h3><div class="grid4">`;
   Object.keys(ia).forEach(name=>{ const data=ia[name]; h+=`<div class="card top"><h3>${name} <span class="badge b-green">ACTIVE 8P</span></h3><div class="small"><b>Fav 8p:</b> ${data.fav.join('-')}</div><div class="small"><b>Out:</b> ${data.outsiders.join('-')}</div></div>`; });
   h+=`</div><div class="small">${a.syntheseIA.global}</div></div>`;
 
-  // SYNTHESE FINALE + BASE BETON + ZONE
-  h+=`<div class="card gold"><h3>📊 SYNTHESE FINALE + BASE BETON + ZONE ABC</h3><div><b>${a.synthese}</b></div><div class="grid3" style="margin-top:8px"><div><b>Base Béton:</b> <span class="badge b-yellow">${a.baseBeton.num}</span> ${a.baseBeton.nom}</div><div><b>Prono 8:</b> ${a.prono8.join('-')}</div><div><b>Zone A:</b> ${a.zoneABC.A.join('-')} | <b>B:</b> ${a.zoneABC.B.join('-')} | <b>C:</b> ${a.zoneABC.C.join('-')}</div></div></div>`;
+  // VERIFICATION SI RESULTAT
+  if(a.verification){
+    const v=a.verification;
+    h+=`<div class="card green"><h3>🏁 VERIFICATION RESULTATS - Arrivée ${v.arrivee.join('-')}</h3><div class="grid3">`;
+    Object.keys(v.checkIA).forEach(ia=>{ const c=v.checkIA[ia]; h+=`<div class="card top"><b>${ia}</b><br>Tiercé: ${c.tierce} Quarte: ${c.quarte} Quinte: ${c.quinte}<br>${c.dans8} dans 8p</div>`; });
+    h+=`</div><div><b>Multi en 8:</b> Ticket ${v.checkMulti.ticket.join('-')} - ${v.checkMulti.dans4}/4 dans les 4 premiers - ${v.checkMulti.gagne?'✅ MULTI GAGNÉ':'❌ PERDU'}</div></div>`;
+  }
 
-  // 21 TOPS EN 8P
-  h+=`<h2 style="color:#f5c518">🏆 LES 21 TOPS - TOUS EN 8P (Règle 1 et 2)</h2><div class="grid3">`;
+  // 21 TOPS 8P
+  h+=`<h2 style="color:#f5c518">🏆 LES 21 TOPS - TOUS EN 8P</h2><div class="grid3">`;
   const topsDef = [
-    {key:'topCotesDirect', title:'1. TOP COTES DIRECT (Favoris PMU) - 8p'},
-    {key:'topChevaux', title:'2. TOP CHEVAUX (Classe) - 8p'},
-    {key:'topPalmares', title:'3. TOP PALMARES (Victoires) - 8p'},
-    {key:'topForme', title:'4. TOP FORME (Excellente/Très Bonne) - 8p FIX'},
+    {key:'topCotesDirect', title:'1. TOP COTES DIRECT - 8p'},
+    {key:'topChevaux', title:'2. TOP CHEVAUX - 8p'},
+    {key:'topPalmares', title:'3. TOP PALMARES - 8p'},
+    {key:'topForme', title:'4. TOP FORME - 8p FIX'},
     {key:'topClasse', title:'5. TOP CLASSE - 8p'},
     {key:'topDrivers', title:'6. TOP DRIVERS - 8p FIX'},
     {key:'topEntraineurs', title:'7. TOP ENTRAINEURS - 8p FIX'},
     {key:'aptitude1er', title:'8. APTITUDE 1ER - 8p'},
     {key:'aptitudePlace', title:'9. APTITUDE PLACE - 8p'},
     {key:'topChronos', title:'10. TOP CHRONOS - 8p'},
-    {key:'topPosition', title:'11. TOP POSITION CORDE - 8p'},
-    {key:'ecarts', title:'12. ECARTS COTES (Matin vs Live) - 8p'},
-    {key:'incontournables', title:'13. INCONTOURNABLES (2 bases) + POUR UNE PLACE (6) = 8p'},
-    {key:'synthesePonderee', title:'14. SYNTHESE PONDEREE (Score) - 8p'},
-    {key:'presse', title:'15. PRESSE - 8p FIX undefined'},
+    {key:'topPosition', title:'11. TOP POSITION - 8p'},
+    {key:'ecarts', title:'12. ECARTS - 8p'},
+    {key:'synthesePonderee', title:'14. SYNTHESE PONDEREE - 8p'},
+    {key:'presse', title:'15. PRESSE - 8p FIX'},
     {key:'algoPerso', title:'16. ALGO PERSO - 8p'},
   ];
   topsDef.forEach(t=>{
     const data = a[t.key];
     if(!data) return;
-    h+=`<div class="card top"><h3>${t.title}</h3>${data.slice(0,8).map((c,i)=>{ const pts=[10,9,8,7,6,5,4,3][i]; return `<div class="row"><span><span class="badge b-yellow">${c.num}</span> ${c.nom||c.driver||c.entraineur||''} <span class="pts">${pts}pts</span></span><span class="small">${c.detail||''}</span></div>`; }).join('')}</div>`;
+    h+=`<div class="card top"><h3>${t.title}</h3>${data.slice(0,8).map((c,i)=>`<div class="row"><span><span class="badge b-yellow">${c.num}</span> ${c.nom||c.driver||c.entraineur||''} <span class="pts">${[10,9,8,7,6,5,4,3][i]}pts</span></span><span class="small">${c.detail||''}</span></div>`).join('')}</div>`;
   });
-  // Synthèse IA et Prono8 et Synthèse des Tops déjà affichés
-  h+=`<div class="card top"><h3>17. SYNTHESE IA (9 IA) - 8p</h3>${a.syntheseIA.fav.slice(0,8).map((f,i)=>{ const pts=[10,9,8,7,6,5,4,3][i]; return `<div class="row"><span><span class="badge b-yellow">${f.num}</span> ${f.nom} <span class="pts">${pts}pts</span></span><span class="small">${f.citations}/9 IA</span></div>`; }).join('')}</div>`;
-  h+=`<div class="card top"><h3>18. PRONO 8 - 8p</h3>${a.prono8.map((n,i)=>{ const ch=a.syntheseDesTops.find(s=>s.num===n); const pts=[10,9,8,7,6,5,4,3][i]; return `<div class="row"><span><span class="badge b-yellow">${n}</span> ${ch?.nom||''} <span class="pts">${pts}pts</span></span></div>`; }).join('')}</div>`;
-  h+=`<div class="card top" style="border-color:#f5c518"><h3>19. SYNTHESE DES TOPS FINALE - Barème 10-3pts - 8p</h3>${a.syntheseDesTops.map((s,i)=>{ const pts=[10,9,8,7,6,5,4,3][i]; return `<div class="row"><span><b>${i+1}e</b> <span class="badge b-yellow">${s.num}</span> ${s.nom} <span class="pts">${s.points} pts totaux</span></span><span class="small">${pts}pts ce top</span></div>`; }).join('')}</div>`;
+  h+=`<div class="card top"><h3>17. SYNTHESE IA - 8p</h3>${a.syntheseIA.fav.slice(0,8).map((f,i)=>`<div class="row"><span><span class="badge b-yellow">${f.num}</span> ${f.nom} <span class="pts">${[10,9,8,7,6,5,4,3][i]}pts</span></span><span class="small">${f.citations}/9 IA</span></div>`).join('')}</div>`;
+  h+=`<div class="card top" style="border-color:#f5c518"><h3>19. SYNTHESE DES TOPS FINALE - 10-3pts - 8p</h3>${a.syntheseDesTops.map((s,i)=>`<div class="row"><span><b>${i+1}e</b> <span class="badge b-yellow">${s.num}</span> ${s.nom} <span class="pts">${s.points} pts totaux</span></span><span class="small">${[10,9,8,7,6,5,4,3][i]}pts ce top</span></div>`).join('')}</div>`;
   h+=`</div>`;
 
   // PARTANTS
-  h+=`<div class="card"><h3>🐴 ${d.partants} PARTANTS - 8P</h3>${d.chevaux.map(c=>`<div class="row"><span><span class="badge b-yellow">${c.num}</span> <b>${c.nom}</b> <span class="small">${c.age} ${c.poids} - ${c.driver} / ${c.entraineur}</span></span><span><span class="badge b-gray">${c.coteMatin}</span> <span class="badge b-green">${c.coteLive}</span> <span class="badge b-orange">${c.coteZeturf} Z</span></span></div>`).join('')}</div>`;
+  h+=`<div class="card"><h3>🐴 ${d.partants} PARTANTS - 8P - COTES LIVE</h3>${d.chevaux.map(c=>`<div class="row"><span><span class="badge b-yellow">${c.num}</span> <b>${c.nom}</b> <span class="small">${c.age} ${c.poids} - ${c.driver} / ${c.entraineur}</span></span><span><span class="badge b-gray">${c.coteMatin}</span> <span class="badge b-green">${c.coteLive}</span> <span class="badge b-orange">${c.coteZeturf} Z</span></span></div>`).join('')}</div>`;
 
   document.getElementById('app').innerHTML=h;
 }
