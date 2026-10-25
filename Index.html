@@ -1,0 +1,66 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>V12.6 DOUBLE BLOC</title><style>*{box-sizing:border-box} body{margin:0;background:#0f1115;color:#e6e8ee;font-family:system-ui} .topbar{position:sticky;top:0;z-index:20;background:#0f1115E6;border-bottom:1px solid #2a3246;padding:12px 16px;display:flex;justify-content:space-between} .yellow{color:#f5c518} .wrap{max-width:1400px;margin:0 auto;padding:12px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:12px;margin:8px 0} .card.gold{border-color:#f5c51850;background:#f5c5180A} .card.purple{border-color:#8b5cf640;background:#8b5cf608} .card.green{border-color:#10b98150;background:#10b9810A} .card.ia{border-color:#8b5cf650;background:#8b5cf60A} .card.top{border-color:#2a3246} .badge{display:inline-flex;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700} .b-yellow{background:#f5c518;color:#000} .b-green{background:#10b98120;color:#6ee7b7;border:1px solid #10b98130} .b-gray{background:#222836;color:#8b93a7} .b-orange{background:#ff6b00;color:#fff} .b-purple{background:#8b5cf620;color:#c4b5fd} .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #2a324650} .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px} .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px} @media(max-width:900px){.grid3,.grid4,.grid2{grid-template-columns:1fr}} .small{font-size:11px;color:#8b93a7} a{color:#f5c518;text-decoration:none} h3{margin:0 0 6px 0;font-size:11px;color:#c9cfdd;text-transform:uppercase} .pts{color:#f5c518;font-weight:700}</style></head><body>
+<div class="topbar"><b class="yellow">V12.6 DOUBLE BLOC</b> <span>BLOC1 PDF/IMAGE/TEXTE + BLOC2 PRONOS PERSO 8FAV+4OUT - 21 TOPS + 9 IA</span><a href="/admin">ADMIN V12.6 DOUBLE BLOC</a></div>
+<div class="wrap"><div id="app">Chargement V12.6 DOUBLE BLOC...</div></div>
+<script>
+async function load(){
+  const r=await fetch('/api/course-du-jour?t='+Date.now(), {cache:'no-store'}); 
+  const j=await r.json(); 
+  const d=j.data; const a=j.analyses; const ia=j.ia_pronos; const perso=d.perso;
+  let h=`<div class="card gold"><b>${d.hippodrome} ${d.date} - ${d.nom}</b><br>Source: ${d.source}<br>Maj: ${new Date(d.lastUpdate).toLocaleString('fr-FR')} - ${d.partants} partants - Mode: ${j.mode}</div>`;
+  h+=`<div class="grid2">`;
+  h+=`<div class="card gold" style="border:2px solid #f5c518"><h3>🎯 MULTI EN 8 OFFICIEL - 22 SOURCES - 7-15-2-11-13-3-5-10</h3><div style="font-size:32px;font-weight:900;color:#f5c518;text-align:center">${a.multi8Detail.ticketStr}</div><div class="small" style="text-align:center">${a.multi8Detail.coutPlein} / ${a.multi8Detail.coutFlexi50}<br>${a.multi8Detail.base}</div></div>`;
+  if(perso && perso.favoris8){
+    h+=`<div class="card purple" style="border:2px solid #8b5cf6"><h3>🎯 MULTI EN 8 PERSO - ${perso.totalSources} PRONOS PERSO - BLOC2</h3><div style="font-size:28px;font-weight:900;color:#a78bfa;text-align:center">${perso.favoris8.map(f=>f.num).join('-')}</div><div class="small" style="text-align:center">8 FAVS PERSO: ${perso.favoris8.map(f=>f.num+'('+f.points+'pts)').join(' ')}<br>4 OUTSIDERS PERSO: ${perso.outsiders4.map(o=>o.num).join('-')} - Barème ${perso.bareme}</div></div>`;
+  } else {
+    h+=`<div class="card purple"><h3>🎯 BLOC 2 PRONOS PERSO - EN ATTENTE</h3><div class="small">Colle tes pronos perso dans ADMIN BLOC 2 → 8 FAVS + 4 OUTSIDERS<br>Barème 1er=10pts → 10e=1pt - Compilation à la demande</div></div>`;
+  }
+  h+=`</div>`;
+  h+=`<div class="grid2">`;
+  h+=`<div class="card gold"><h3>🏆 SYNTHESE OFFICIELLE 22 SOURCES - 10→1pt - 7-15-2-11-13-3-5-10</h3><div class="grid4">`;
+  a.syntheseDesTops.slice(0,8).forEach((s,i)=>{ h+=`<div class="card top"><div><span class="badge b-yellow">${s.num}</span> <b>${s.nom}</b> <span class="pts">${s.points} pts</span></div><div class="small">${s.citations} cit - Place ${i+1}e</div></div>`; });
+  h+=`</div></div>`;
+  if(perso && perso.favoris8){
+    h+=`<div class="card purple"><h3>🎯 SYNTHESE PRONOS PERSO - 8 FAVS + 4 OUTSIDERS - BLOC2</h3><div class="grid4">`;
+    perso.favoris8.forEach((f,i)=>{ h+=`<div class="card top"><div><span class="badge b-yellow">${f.num}</span> <b>${f.points}pts</b> <span class="small">${f.citations} cit</span></div><div class="small">Fav ${i+1} - ${[10,9,8,7,6,5,4,3][i]}pts</div></div>`; });
+    h+=`</div><div class="small">Outsiders: ${perso.outsiders4.map(o=>o.num+'('+o.points+'pts)').join(' ')}</div></div>`;
+  }
+  h+=`</div>`;
+  h+=`<div class="card ia"><h3>🤖 9 IA ACTIVES - 8P - 21 TOPS CONSERVÉS</h3><div class="grid4">`;
+  Object.keys(ia).forEach(name=>{ const data=ia[name]; h+=`<div class="card top"><h3>${name} <span class="badge b-green">ACTIVE 8P</span></h3><div class="small"><b>Fav 8p:</b> ${data.fav.join('-')}</div><div class="small"><b>Out:</b> ${data.outsiders.join('-')}</div></div>`; });
+  h+=`</div></div>`;
+  h+=`<h2 style="color:#f5c518">🏆 LES 21 TOPS COMPLETS CONSERVÉS - TOUS EN 8P - V12.6</h2><div class="grid3">`;
+  const topsDef = [
+    {key:'topCotesDirect', title:'1. TOP COTES DIRECT - 8p'},
+    {key:'topChevaux', title:'2. TOP CHEVAUX - 8p'},
+    {key:'topPalmares', title:'3. TOP PALMARES - 8p'},
+    {key:'topForme', title:'4. TOP FORME - 8p FIX'},
+    {key:'topClasse', title:'5. TOP CLASSE - 8p'},
+    {key:'topDrivers', title:'6. TOP DRIVERS - 8p FIX'},
+    {key:'topEntraineurs', title:'7. TOP ENTRAINEURS - 8p FIX'},
+    {key:'aptitude1er', title:'8. APTITUDE 1ER - 8p'},
+    {key:'aptitudePlace', title:'9. APTITUDE PLACE - 8p'},
+    {key:'topChronos', title:'10. TOP CHRONOS - 8p'},
+    {key:'topPosition', title:'11. TOP POSITION - 8p'},
+    {key:'ecarts', title:'12. ECARTS - 8p'},
+    {key:'incontournables', title:'13. INCONTOURNABLES - 8p'},
+    {key:'pourUnePlace', title:'13b. POUR UNE PLACE - 8p'},
+    {key:'synthesePonderee', title:'14. SYNTHESE PONDEREE - 8p'},
+    {key:'presse', title:'15. PRESSE - 8p FIX'},
+    {key:'algoPerso', title:'16. ALGO PERSO - 8p'},
+    {key:'prono8', title:'17. PRONO 8 - 8p'},
+  ];
+  topsDef.forEach(t=>{
+    const data = a[t.key];
+    if(!data) return;
+    if(Array.isArray(data) && typeof data[0]==='number'){
+      h+=`<div class="card top"><h3>${t.title}</h3><div><b>${data.join('-')}</b></div></div>`;
+    } else {
+      h+=`<div class="card top"><h3>${t.title}</h3>${data.slice(0,8).map((c,i)=>`<div class="row"><span><span class="badge b-yellow">${c.num}</span> ${c.nom} <span class="pts">${c.points||[10,9,8,7,6,5,4,3][i]}pts</span></span><span class="small">${c.detail||''}</span></div>`).join('')}</div>`;
+    }
+  });
+  h+=`</div>`;
+  document.getElementById('app').innerHTML=h;
+}
+load();
+</script>
+</body></html>
