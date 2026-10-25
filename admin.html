@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>ADMIN V12.7 VERIF COMPLET BLOC1+BLOC2</title>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>ADMIN V12.11 MULTI 8 + 2 OUTSIDERS</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
 <style>
@@ -27,7 +27,7 @@ input{background:#0f1115;border:1px solid #2a3246;border-radius:8px;padding:10px
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:900px){.grid2{grid-template-columns:1fr}}
 </style></head><body>
-<div class="topbar"><div><b class="yellow">ADMIN V12.7 VERIF COMPLET BLOC1+BLOC2</b> <span class="small">BLOC1 PDF/IMAGE/TEXTE + BLOC2 PRONOS PERSO 8FAV+4OUT + VERIF DETAILLE BLOC1+BLOC2 - 21 TOPS + 9 IA</span></div><a href="/" style="color:#f5c518">← Principale</a></div>
+<div class="topbar"><div><b class="yellow">ADMIN V12.11 MULTI 8 + 2 OUTSIDERS</b> <span class="small">BLOC1 PDF/IMAGE/TEXTE + BLOC2 PRONOS PERSO 8FAV+4OUT - 21 TOPS + 9 IA conservés</span></div><a href="/" style="color:#f5c518">← Principale</a></div>
 <div class="wrap">
 <div class="card gold"><div style="font-size:28px;font-weight:900;color:#f5c518;text-align:center" id="multi8Display">7-15-2-11-13-3-5-10</div><div style="text-align:center" class="small">Multi en 8 officiel - 210€ plein / 35€ Flexi 50% - 7=109pts 15=109pts 2=102pts - 22 sources</div></div>
 
@@ -85,7 +85,7 @@ Ex:
 <div id="verifResult" class="log" style="margin-top:8px;display:none"></div>
 </div>
 
-<div id="log" class="log">V12.6 DOUBLE BLOC prêt - BLOC1 PDF/Image/Texte + BLOC2 Pronos Perso 8 favs + 4 outsiders - 21 Tops + 9 IA conservés</div>
+<div id="log" class="log">V12.11 MULTI 8 + 2 OUTSIDERS prêt - BLOC1 PDF/Image/Texte + BLOC2 Pronos Perso 8 favs + 4 outsiders - 21 Tops + 9 IA conservés</div>
 </div>
 
 <script>
@@ -157,32 +157,9 @@ function showPersoResult(j){
 }
 function clearPerso(){ document.getElementById('t2').value=''; document.getElementById('persoResult').innerHTML='<span class=small>En attente compilation perso...</span>'; document.getElementById('persoStatus').textContent='Effacé - Prêt'; }
 async function verifier(){
-  const arrivee=document.getElementById('arriveeInput').value; if(!arrivee) return alert('Tape arrivée ex: 7-15-2-11-13');
+  const arrivee=document.getElementById('arriveeInput').value; if(!arrivee) return alert('Tape arrivée');
   const r=await fetch('/api/verifier-resultat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({arrivee})}); const j=await r.json();
-  if(j.success){
-    const el=document.getElementById('verifResult'); el.style.display='block';
-    const v=j.verification;
-    let html = `🏁 ARRIVÉE: ${v.arrivee.join('-')} - ${new Date(v.date).toLocaleString('fr-FR')}\n\n`;
-    html += `=== MULTI OFFICIEL BLOC1 (22 sources) ===\nTicket: ${v.checkMulti.ticketStr}\nDans 4: ${v.checkMulti.dans4}/4 - Dans 5: ${v.checkMulti.dans5}/5 - ${v.checkMulti.multiGagne}\n\n`;
-    if(v.checkPerso){
-      html += `=== MULTI PERSO BLOC2 (${v.checkPerso.totalSources} pronos perso) ===\nFavoris 8: ${v.checkPerso.favoris8}\nOutsiders 4: ${v.checkPerso.outsiders4}\nDans 4: ${v.checkPerso.dans4}/4 - Dans 5: ${v.checkPerso.dans5}/5 - ${v.checkPerso.multiPersoGagne}\nTiercé: ${v.checkPerso.tierce} - Quinte: ${v.checkPerso.quinte}\n\n`;
-      html += `=== COMPARAISON BLOC1 vs BLOC2 ===\n${v.syntheseCompare.meilleur}\nOfficiel: ${v.checkMulti.dans4}/4 - Perso: ${v.checkPerso.dans4}/4\n\n`;
-    }
-    html += `=== 9 IA ACTIVES (BLOC1) ===\n`;
-    Object.keys(v.checkIA).forEach(ia=>{
-      const c=v.checkIA[ia];
-      html += `${ia}: Fav ${c.fav} - Tiercé ${c.tierce} - Quarte ${c.quarte} - Quinte ${c.quinte} - Dans 8: ${c.dans8}\n`;
-    });
-    html += `\n=== 21 TOPS COMPLETS (BLOC1) ===\n`;
-    Object.keys(v.checkTops).forEach(top=>{
-      const c=v.checkTops[top];
-      html += `${top}: ${c.nums} - Tiercé ${c.tierce} ${c.tierceOk?'✅':''} - Quinte ${c.quinte} ${c.quinteOk?'✅':''}\n`;
-    });
-    html += `\n=== RÉSUMÉ FINAL ===\nArrivée: ${v.arrivee.join('-')}\nOfficiel: ${v.checkMulti.multiGagne} (${v.checkMulti.dans4}/4)\n`;
-    if(v.checkPerso) html += `Perso: ${v.checkPerso.multiPersoGagne} (${v.checkPerso.dans4}/4)\nMeilleur: ${v.syntheseCompare.meilleur}\n`;
-    html += `Total Tops vérifiés: ${v.totalTops} - Total IA: ${v.totalIA}\n`;
-    el.innerText=html;
-  }
+  if(j.success){ const el=document.getElementById('verifResult'); el.style.display='block'; el.innerText=JSON.stringify(j.verification,null,2); }
 }
 check();
 </script></body></html>
