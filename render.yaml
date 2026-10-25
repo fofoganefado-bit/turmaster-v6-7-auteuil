@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: turmaster-v6-7-auteuil
-    env: node
-    buildCommand: npm install
-    startCommand: node server.js
