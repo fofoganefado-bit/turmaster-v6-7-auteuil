@@ -1,165 +1,157 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>ADMIN V12.11 MULTI 8 + 2 OUTSIDERS</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ADMIN V12.11 MULTI 8 + 2 OUTSIDERS - SYNTHESE IA PONDEREE 9 IA</title>
 <style>
-*{box-sizing:border-box}
-body{background:#0f1115;color:#e6e8ee;font-family:system-ui;padding:0;margin:0}
-.topbar{background:#1a1f2e;border-bottom:1px solid #2a3246;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-.wrap{max-width:1400px;margin:0 auto;padding:12px}
+*{box-sizing:border-box} body{margin:0;background:#0f1115;color:#e6e8ee;font-family:system-ui}
+.topbar{position:sticky;top:0;z-index:20;background:#0f1115f2;border-bottom:1px solid #2a3246;padding:10px 14px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.yellow{color:#f5c518} .wrap{max-width:1400px;margin:0 auto;padding:12px}
 .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:14px;margin:10px 0}
-.card.gold{border-color:#f5c51860;background:#f5c51810}
-.card.green{border-color:#10b98140;background:#10b98108}
-.card.purple{border-color:#8b5cf640;background:#8b5cf608}
-.card.blue{border-color:#3b82f640;background:#3b82f608}
-.dash{border:2px dashed #f5c51860;border-radius:12px;padding:20px;text-align:center;cursor:pointer}
-.dash:hover{border-color:#f5c518;background:#f5c51808}
-textarea{width:100%;background:#0f1115;color:#e6e8ee;border:1px solid #2a3246;border-radius:8px;padding:10px;font-family:monospace;font-size:12px}
-button{background:#f5c518;color:#000;border:0;padding:10px 18px;border-radius:8px;font-weight:700;cursor:pointer;margin:4px}
-button.green{background:#10b981;color:#fff}
-button.purple{background:#8b5cf6;color:#fff}
-button.gray{background:#2a3246;color:#e6e8ee}
-.log{background:#0f1115;border:1px solid #2a3246;padding:10px;border-radius:8px;color:#9ca3af;font-family:monospace;font-size:11px;white-space:pre-wrap;max-height:500px;overflow:auto}
-input{background:#0f1115;border:1px solid #2a3246;border-radius:8px;padding:10px;color:#e6e8ee}
-.badge{display:inline-flex;padding:2px 8px;border-radius:999px;background:#f5c518;color:#000;font-weight:700;font-size:12px}
-.badge-green{background:#10b98120;color:#6ee7b7;border:1px solid #10b98130}
-.yellow{color:#f5c518}
-.small{font-size:11px;color:#8b93a7}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:900px){.grid2{grid-template-columns:1fr}}
-</style></head><body>
-<div class="topbar"><div><b class="yellow">ADMIN V12.11 MULTI 8 + 2 OUTSIDERS</b> <span class="small">BLOC1 PDF/IMAGE/TEXTE + BLOC2 PRONOS PERSO 8FAV+4OUT - 21 TOPS + 9 IA conservés</span></div><a href="/" style="color:#f5c518">← Principale</a></div>
+.card.gold{border-color:#f5c51880;background:#f5c5180d} .card.ia{border-color:#8b5cf680;background:#8b5cf60d} .card.purple{border-color:#8b5cf640;background:#8b5cf608} .card.green{border-color:#10b98150;background:#10b9810a}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px} @media(max-width:900px){.grid2{grid-template-columns:1fr}}
+.badge{display:inline-flex;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:800} .b-yellow{background:#f5c518;color:#000}
+.btn{width:100%;padding:14px;background:linear-gradient(180deg,#f5d06a,#d4a017);color:#000;border:none;border-radius:10px;font-weight:900;font-size:16px;cursor:pointer}
+.btn:hover{filter:brightness(1.1)}
+.input, .textarea{width:100%;background:#0f1115;border:1px solid #2a3246;border-radius:8px;padding:12px;color:#e6e8ee;font-size:15px}
+.textarea{min-height:120px} .small{font-size:12px;color:#8b93a7} h3{margin:0 0 8px 0;font-size:14px;color:#f5c518;text-transform:uppercase}
+.row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #2a324650;font-size:15px}
+.boxes{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0} .box{width:72px;height:72px;background:#0f1115;border:2px solid #f5c518;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;color:#f5c518}
+.box.ia{border-color:#8b5cf6;color:#c4b5fd} .box.out{border-color:#f59e0b;color:#fbbf24;background:#f59e0b15}
+</style>
+</head>
+<body>
+<div class="topbar">
+<b class="yellow">ADMIN V12.11 | MULTI 8 + 2 OUTSIDERS - SYNTHESE IA PONDEREE 9 IA</b>
+<span style="color:#8b93a7">21 TOPS DIVERS + 9 IA DIVERS + SYNTHESE IA 8+2 PONDERATION 10→1pt + DOUBLE BLOC + VERIF BLOC1+BLOC2</span>
+<a href="/" style="color:#f5c518">→ MAIN</a>
+</div>
 <div class="wrap">
-<div class="card gold"><div style="font-size:28px;font-weight:900;color:#f5c518;text-align:center" id="multi8Display">7-15-2-11-13-3-5-10</div><div style="text-align:center" class="small">Multi en 8 officiel - 210€ plein / 35€ Flexi 50% - 7=109pts 15=109pts 2=102pts - 22 sources</div></div>
+
+<div class="card gold">
+<h3>🏆 MULTI EN 8 + 2 OUTSIDERS OFFICIEL - 10 CHEVAUX - SYNTHESE 22 SOURCES</h3>
+<div id="multiOfficiel" class="boxes"></div>
+<div class="small">Base béton + 7 autres + 2 outsiders = 10 chevaux - Ticket officiel</div>
+</div>
+
+<div class="card ia" style="border-width:2px">
+<h3>🤖 SYNTHESE PONDEREE DES 9 IA - 8 FAVS + 2 OUTSIDERS - BAREME 1er=10pts → 10e=1pt - ICI C'EST LA SYNTHESE 9 IA</h3>
+<div style="font-size:14px;color:#c4b5fd;margin-bottom:8px">9 IA compilées avec pondération 10→1pt : CHATGPT + GEMINI + CLAUDE + GROK + PERPLEXITY + MISTRAL + DEEPSEEK + COPILOT + ZETURF_IA</div>
+<div id="multiIA" class="boxes"></div>
+<div id="multiIADetail" class="small"></div>
+<div id="iaRanking" style="margin-top:10px"></div>
+</div>
 
 <div class="grid2">
-<!-- BLOC 1 -->
-<div class="card blue">
-<h3 style="margin:0 0 8px 0;color:#60a5fa">📁 BLOC 1 - FICHIERS GENY / ZETURF / IMAGES / TEXTES</h3>
-<div class="small">Lit PDF, images (OCR), textes - 21 Tops + 9 IA + Multi8 officiels</div>
-<div class="dash" id="dropZone" style="margin:10px 0">
-<div style="font-size:28px">📄</div>
-<b>Glisser PDF, Image, TXT ici</b><br><span class="small">PDF Geny, Zeturf, PNG, JPG, TXT - OCR auto</span><br>
-<input type="file" id="fileInput" accept=".pdf,.txt,.png,.jpg,.jpeg" style="display:none">
-<button class="gray" onclick="document.getElementById('fileInput').click()">Parcourir</button>
-<div id="fileStatus" class="small" style="margin-top:8px">Prêt - PDF + Image + Texte</div>
+<div class="card">
+<h3>📄 BLOC 1 • FICHIERS GENY / ZETURF / IMAGES / TEXTES - OCR AUTO</h3>
+<div style="border:2px dashed #2a3246;border-radius:10px;padding:20px;text-align:center;margin:8px 0">
+<div style="font-size:16px">Glisser PDF • Image • TXT ici</div>
+<div class="small">PDF • TXT • PNG • JPG — OCR auto</div>
+<input type="file" id="fileInput" multiple accept=".pdf,.txt,.png,.jpg,.jpeg" style="margin-top:10px">
 </div>
-<textarea id="t1" rows="6" placeholder="Texte Geny collé ici: 1 Agile (13) Mlle M. Velon... ou texte Zeturf 1 - SIR MARVEL - ..."></textarea>
-<div style="margin-top:6px">
-<button onclick="autoUpdateBloc1()">METTRE À JOUR BLOC1 - PDF/IMAGE/TEXTE</button>
-<button class="gray" onclick="check()">ACTUALISER</button>
+<textarea id="bloc1Text" class="textarea" placeholder="Colle ici texte Geny / Zeturf / image copiée... Le parseur extrait auto num + nom + corde"></textarea>
+<button class="btn" onclick="updateBloc1()">METTRE À JOUR BLOC1</button>
+<div id="bloc1Log" class="small" style="margin-top:8px"></div>
 </div>
-</div>
-
-<!-- BLOC 2 -->
 <div class="card purple">
-<h3 style="margin:0 0 8px 0;color:#a78bfa">🎯 BLOC 2 - PRONOS PERSO - COMPILATION À LA DEMANDE</h3>
-<div class="small">Compile tes pronos perso - Analyse - 8 favs + 4 outsiders - Barème 1er=10pts → 10e=1pt</div>
-<textarea id="t2" rows="10" placeholder="Colle ici tes pronos perso, 1 prono par ligne:
-Ex:
+<h3>✍️ BLOC 2 • PRONOS PERSO - COMPILATION À LA DEMANDE - 8 FAVS + 4 OUTSIDERS</h3>
+<div class="small" style="margin-bottom:8px">Chaque ligne = 1 prono perso - Barème 1er=10pts → 10e=1pt - Compilation à la demande</div>
+<textarea id="bloc2Text" class="textarea" placeholder="Colle tes pronos perso ici - Ex:
 11-7-15-10-13-2-6-9
-13-15-12-5-8-1-3-10
-2-7-13-3-8-15-1-6
-8-7-3-10-12-1-4-5
-16-4-2-3-6-13-15-5-10-7
-3-7-11-15-6-1-8-10-5-4
-7-10-4-8-9-5-15-16-11-3
-2-15-3-8-13-7-11-9
-... etc chaque ligne = 1 prono perso"></textarea>
-<div style="margin-top:6px">
-<button class="purple" onclick="compilePerso()">COMPILER PRONOS PERSO → 8 FAVS + 4 OUTSIDERS</button>
-<button class="gray" onclick="clearPerso()">EFFACER</button>
-</div>
-<div id="persoStatus" class="small" style="margin-top:8px">Prêt - Colle tes pronos perso</div>
+7-15-2-11-13-3-5-10
+15-7-2-11-13-3-10-5"></textarea>
+<button class="btn" style="background:linear-gradient(180deg,#a78bfa,#7c3aed);color:#fff" onclick="compilePerso()">COMPILER PRONOS PERSO → 8 FAVS + 4 OUTSIDERS</button>
+<div id="bloc2Log" class="small" style="margin-top:8px"></div>
 </div>
 </div>
 
-<div class="grid2">
-<div class="card gold"><h3 style="margin:0;color:#f5c518">🏆 SYNTHESE OFFICIELLE 22 SOURCES - 10→1pt</h3><div id="syntheseContent" style="margin-top:8px"></div></div>
-<div class="card purple"><h3 style="margin:0;color:#a78bfa">🎯 RESULTAT COMPILATION PERSO - 8 FAVS + 4 OUTSIDERS</h3><div id="persoResult" style="margin-top:8px"><span class="small">En attente compilation perso...</span></div></div>
+<div class="card">
+<h3>📊 SYNTHESE OFFICIELLE 22 SOURCES - 8 FAVS + 4 OUTSIDERS</h3>
+<div id="syntheseOff" class="grid2"></div>
 </div>
 
-<div class="card"><h3 style="margin:0">21 TOPS COMPLETS + 9 IA + VERIF</h3><div id="topsContent" class="small" style="margin-top:8px"></div></div>
-
-<div class="card green"><h3 style="margin:0;color:#10b981">VERIFICATEUR RESULTAT</h3>
-<div style="display:flex;gap:8px;margin-top:8px"><input id="arriveeInput" placeholder="2-5-3-9-1" style="flex:1"><button class="green" onclick="verifier()">VERIFIER</button></div>
-<div id="verifResult" class="log" style="margin-top:8px;display:none"></div>
+<div class="card ia">
+<h3>🤖 SYNTHESE PONDEREE 9 IA - DETAIL COMPLET - LA SYNTHESE EST ICI</h3>
+<div id="syntheseIAComplet"></div>
 </div>
 
-<div id="log" class="log">V12.11 MULTI 8 + 2 OUTSIDERS prêt - BLOC1 PDF/Image/Texte + BLOC2 Pronos Perso 8 favs + 4 outsiders - 21 Tops + 9 IA conservés</div>
+<div class="card">
+<h3>🏇 21 TOPS DIVERSIFIES - TOUS ACTIFS - TOUS DIFFERENTS - PAS DE BUG IDENTIQUE</h3>
+<div id="topsDivers" style="font-size:13px"></div>
 </div>
 
+<div class="card">
+<h3>🧠 9 IA ACTIVES - TOUTES DIVERSES - DETAIL</h3>
+<div id="iaActives"></div>
+</div>
+
+<div class="card green">
+<h3>✅ VERIFICATEUR RESULTATS DETAILLES - BLOC1 + BLOC2 + 9 IA + 21 TOPS + MULTI 8+2</h3>
+<input id="arrivee" class="input" placeholder="Arrivée ex: 7-15-2-11-13">
+<button class="btn" style="background:linear-gradient(180deg,#6ee7b7,#10b981);margin-top:8px" onclick="verifier()">VERIFIER RESULTAT - BLOC1 + BLOC2 + IA + 21 TOPS</button>
+<div id="verifLog" style="margin-top:10px;white-space:pre-wrap;font-size:13px;background:#0f1115;padding:10px;border-radius:8px"></div>
+</div>
+
+</div>
 <script>
-if(typeof pdfjsLib!=='undefined'){ pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; }
-const fileInput=document.getElementById('fileInput'); const dropZone=document.getElementById('dropZone'); const fileStatus=document.getElementById('fileStatus');
-fileInput.addEventListener('change', e=>{ if(e.target.files[0]) handleFile(e.target.files[0]); });
-dropZone.addEventListener('dragover', e=>{ e.preventDefault(); dropZone.style.borderColor='#f5c518'; });
-dropZone.addEventListener('dragleave', e=>{ dropZone.style.borderColor='#f5c51860'; });
-dropZone.addEventListener('drop', e=>{ e.preventDefault(); dropZone.style.borderColor='#f5c51860'; if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
-async function handleFile(file){
-  fileStatus.textContent=file.name+' - Lecture...';
-  const name=file.name.toLowerCase();
-  if(name.endsWith('.pdf')){
-    try{
-      const buffer=await file.arrayBuffer();
-      const pdf=await pdfjsLib.getDocument({data:buffer}).promise;
-      let fullText='';
-      for(let i=1;i<=pdf.numPages;i++){ const page=await pdf.getPage(i); const content=await page.getTextContent(); fullText+=content.items.map(it=>it.str).join(' ')+'\n'; }
-      document.getElementById('t1').value=fullText;
-      fileStatus.textContent='✅ PDF '+pdf.numPages+'p - '+fullText.length+' car - BLOC1 prêt - Clique METTRE À JOUR BLOC1';
-    }catch(e){ fileStatus.textContent='❌ PDF: '+e.message; }
-  } else if(name.endsWith('.png')||name.endsWith('.jpg')||name.endsWith('.jpeg')){
-    fileStatus.textContent='OCR image...';
-    try{ const {data:{text}}=await Tesseract.recognize(file,'fra+eng'); document.getElementById('t1').value=text; fileStatus.textContent='✅ OCR image - '+text.length+' car - BLOC1 prêt'; }catch(e){ fileStatus.textContent='❌ OCR: '+e.message; }
-  } else {
-    const text=await file.text(); document.getElementById('t1').value=text; fileStatus.textContent='✅ TXT lu - BLOC1 prêt';
-  }
+let data=null;
+async function load(){
+  const r=await fetch('/api/course-du-jour'); data=await r.json();
+  render();
 }
-async function check(){
-  const r=await fetch('/api/course-du-jour?t='+Date.now()); const j=await r.json();
-  document.getElementById('multi8Display').innerText=j.analyses.multi8Detail.ticketStr;
-  document.getElementById('syntheseContent').innerHTML=j.analyses.syntheseDesTops.map((s,i)=>'<div><span class=badge>'+s.num+'</span> '+s.nom+' <b>'+s.points+'pts</b> ('+s.citations+' cit) - Place '+(i+1)+'e</div>').join('');
-  document.getElementById('topsContent').innerHTML='Top Cotes Direct: '+j.analyses.topCotesDirect.map(c=>c.num).join('-')+'<br>Top Chevaux: '+j.analyses.topChevaux.map(c=>c.num).join('-')+'<br>Top Forme 8p FIX: '+j.analyses.topForme.map(c=>c.num).join('-')+'<br>Top Drivers 8p FIX: '+j.analyses.topDrivers.map(c=>c.num).join('-')+'<br>Top Entraineurs 8p FIX: '+j.analyses.topEntraineurs.map(c=>c.num).join('-')+'<br>Presse 8p FIX: '+j.analyses.presse.map(c=>c.num).join('-')+'<br>Synthèse Ponderee: '+j.analyses.synthesePonderee.map(c=>c.num).join('-')+'<br>IA: '+Object.keys(j.ia_pronos).map(k=>k+': '+j.ia_pronos[k].fav.join('-')).join(' | ');
-  document.getElementById('log').innerText='BLOC1: '+j.data.hippodrome+' - '+j.data.partants+' partants - Multi officiel: '+j.analyses.multi8Detail.ticketStr+'\nMode: '+j.mode;
-  if(j.data.perso && j.data.perso.favoris8){
-    showPersoResult(j.data.perso);
-  }
+function render(){
+  if(!data) return;
+  const synthese = data.analyses.syntheseDesTops;
+  const ia = data.analyses.syntheseIA;
+  const multi = data.analyses.multi8Detail;
+  const iaP = data.ia_pronos;
+  // Multi officiel 8+2
+  document.getElementById('multiOfficiel').innerHTML = multi.ticketPlus2Str.split('-').map((n,i)=>`<div class="box ${i>=8?'out':''}">${n}</div>`).join('') + `<div style="margin-left:10px;font-size:14px;color:#f5c518">8 FAVS ${multi.ticket8Str} + 2 OUT ${data.data.compilation.outsiders.slice(0,2).join('-')} = 10 CHEVAUX</div>`;
+  // Multi IA 8+2 - SYNTHESE PONDEREE 9 IA - ICI
+  document.getElementById('multiIA').innerHTML = ia.ticket8plus2.split('-').map((n,i)=>`<div class="box ${i>=8?'out ia':''}">${n}</div>`).join('') + `<div style="margin-left:10px;font-size:14px;color:#c4b5fd">8 FAVS ${ia.ticket8} + 2 OUT ${ia.favoris8.slice(8,10).map(f=>f.num).join('-')||ia.outsiders2.map(o=>o.num).join('-')} = 10 CHEVAUX - SYNTHESE 9 IA PONDEREE</div>`;
+  document.getElementById('multiIADetail').innerHTML = `Synthèse pondérée 9 IA avec barème 1er=10pts → 10e=1pt : ${ia.global} | Ticket 8: ${ia.ticket8} | Ticket 10: ${ia.ticket8plus2} | Total 9 IA compilées`;
+  // Ranking IA
+  document.getElementById('iaRanking').innerHTML = '<div style="font-size:13px">' + ia.ranked.map(r=>`#${r.num} ${r.nom} <b>${r.points}pts</b> (${r.citations}/9 IA)`).join(' | ') + '</div>';
+  // Synthese officielle
+  document.getElementById('syntheseOff').innerHTML = `<div>${synthese.map((s,i)=>`<div class="row"><span>#${i+1} ${s.num} ${s.nom}</span><span><b>${s.points}pts</b> (${s.citations} cit)</span></div>`).join('')}</div><div><div class="small">Favoris 8: ${multi.ticket8Str}</div><div class="small">Outsiders: ${data.data.compilation.outsiders.join('-')}</div><div class="small">Base béton: ${data.analyses.baseBeton.num} ${data.analyses.baseBeton.nom}</div></div>`;
+  // Synthese IA complet - LA SYNTHESE EST ICI
+  document.getElementById('syntheseIAComplet').innerHTML = `
+    <div style="font-size:16px;font-weight:900;color:#c4b5fd">🤖 SYNTHESE PONDEREE DES 9 IA - 8 FAVORIS + 2 OUTSIDERS - BAREME 10→1pt</div>
+    <div style="margin:8px 0">9 IA compilées : ${Object.keys(iaP).join(' + ')}</div>
+    <div class="grid2">
+      <div><b>8 FAVORIS IA (pondération 10→1pt):</b><br>${ia.favoris8.map(f=>`${f.num} ${f.nom} <b>${f.points}pts</b> (${f.citations}/9 IA)`).join('<br>')}</div>
+      <div><b>2 OUTSIDERS IA:</b><br>${ia.outsiders2.map(o=>`${o.num} ${o.nom} <b>${o.points}pts</b> (${o.citations}/9 IA)`).join('<br>')}<br><br><b>Ticket 8 FAVS:</b> ${ia.ticket8}<br><b>Ticket 10 (8+2):</b> ${ia.ticket8plus2}</div>
+    </div>
+    <div style="margin-top:10px;font-size:13px;background:#0f1115;padding:8px;border-radius:6px">Calcul pondéré : 1er=10pts, 2e=9pts, 3e=8pts, 4e=7pts, 5e=6pts, 6e=5pts, 7e=4pts, 8e=3pts, 9e=2pts, 10e=1pt - Total par cheval sur 9 IA<br>${ia.ranked.map(r=>`${r.num}:${r.points}pts`).join(' | ')}</div>
+  `;
+  // Tops divers
+  const tops = data.analyses;
+  document.getElementById('topsDivers').innerHTML = `
+    Top Cotes Direct: ${tops.topCotesDirect.map(c=>c.num).join('-')} vs Top Chevaux: ${tops.topChevaux.map(c=>c.num).join('-')} vs Top Palmares: ${tops.topPalmares.map(c=>c.num).join('-')} vs Top Forme: ${tops.topForme.map(c=>c.num).join('-')} vs Top Classe: ${tops.topClasse.map(c=>c.num).join('-')} vs Top Drivers: ${tops.topDrivers.map(c=>c.num).join('-')} vs Top Entraineurs: ${tops.topEntraineurs.map(c=>c.num).join('-')} - TOUS DIVERSIFIES ✅
+  `;
+  // IA actives
+  document.getElementById('iaActives').innerHTML = Object.keys(iaP).map(iaName=>`<div class="row"><span><b>${iaName}</b>: ${iaP[iaName].fav.join('-')} + ${iaP[iaName].outsiders.join('-')}</span><span class="small">${iaP[iaName].detail}</span></div>`).join('');
 }
-async function autoUpdateBloc1(){
-  const text=document.getElementById('t1').value; if(!text) return alert('Colle texte BLOC1');
-  const r=await fetch('/api/auto-update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})}); const j=await r.json();
-  document.getElementById('log').innerText=JSON.stringify(j,null,2);
-  if(j.success){ fileStatus.textContent='✅ BLOC1: '+j.message; check(); }
+async function updateBloc1(){
+  const text = document.getElementById('bloc1Text').value || '';
+  const r = await fetch('/api/auto-update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})});
+  const j = await r.json(); document.getElementById('bloc1Log').innerText = j.message; load();
 }
 async function compilePerso(){
-  const text=document.getElementById('t2').value; if(!text) return alert('Colle tes pronos perso dans BLOC2');
-  document.getElementById('persoStatus').textContent='Compilation perso en cours...';
-  const r=await fetch('/api/compilation-perso',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})}); const j=await r.json();
-  if(j.success){
-    showPersoResult(j);
-    document.getElementById('persoStatus').textContent='✅ BLOC2: '+j.message+' - 8 favs + 4 outsiders';
-    document.getElementById('log').innerText='BLOC2 PERSO: '+j.totalSources+' pronos perso compilés\nFavoris 8: '+j.favoris8.map(f=>f.num).join('-')+'\nOutsiders 4: '+j.outsiders4.map(o=>o.num).join('-')+'\nDétails:\n'+j.ranked.map(r=>r.num+'='+r.points+'pts ('+r.citations+' cit)').join(' ');
-  } else {
-    document.getElementById('persoStatus').textContent='❌ '+j.message;
-  }
+  const text = document.getElementById('bloc2Text').value;
+  const r = await fetch('/api/compilation-perso',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})});
+  const j = await r.json(); document.getElementById('bloc2Log').innerText = JSON.stringify(j,null,2); load();
 }
-function showPersoResult(j){
-  const favs = j.favoris8||[]; const outs = j.outsiders4||[]; const ranked = j.ranked||[];
-  let html = '<div class="card" style=background:#10b98115><b style=color:#10b981>8 FAVORIS - BLOC2 PERSO</b><br>';
-  html+='<div style=font-size:22px;font-weight:800;color:#f5c518>'+favs.map(f=>f.num).join('-')+'</div>';
-  html+=favs.map((f,i)=>'<div><span class=badge>'+f.num+'</span> '+f.points+'pts ('+f.citations+' cit) - Place '+(i+1)+'e - '+[10,9,8,7,6,5,4,3][i]+'pts</div>').join('');
-  html+='</div>';
-  html+='<div class="card" style=background:#f59e0b15;margin-top:8px><b style=color:#f59e0b>4 OUTSIDERS - BLOC2 PERSO</b><br>';
-  html+='<div style=font-size:18px;font-weight:800;color:#f5c518>'+outs.map(o=>o.num).join('-')+'</div>';
-  html+=outs.map((o,i)=>'<div><span class=badge>'+o.num+'</span> '+o.points+'pts ('+o.citations+' cit)</div>').join('');
-  html+='</div>';
-  html+='<div class=small style=margin-top:8px>Classement complet: '+ranked.map(r=>r.num+'('+r.points+'pts)').join(' ')+'<br>Sources: '+j.totalSources+' pronos perso - Barème '+j.bareme+'</div>';
-  document.getElementById('persoResult').innerHTML=html;
-}
-function clearPerso(){ document.getElementById('t2').value=''; document.getElementById('persoResult').innerHTML='<span class=small>En attente compilation perso...</span>'; document.getElementById('persoStatus').textContent='Effacé - Prêt'; }
 async function verifier(){
-  const arrivee=document.getElementById('arriveeInput').value; if(!arrivee) return alert('Tape arrivée');
-  const r=await fetch('/api/verifier-resultat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({arrivee})}); const j=await r.json();
-  if(j.success){ const el=document.getElementById('verifResult'); el.style.display='block'; el.innerText=JSON.stringify(j.verification,null,2); }
+  const arrivee = document.getElementById('arrivee').value;
+  const r = await fetch('/api/verifier-resultat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({arrivee})});
+  const j = await r.json(); document.getElementById('verifLog').innerText = JSON.stringify(j,null,2);
 }
-check();
-</script></body></html>
+document.getElementById('fileInput').addEventListener('change', async (e)=>{
+  const files = e.target.files; let allText=''; for(const f of files){ allText += '\n' + await f.text(); } document.getElementById('bloc1Text').value = allText; updateBloc1();
+});
+load();
+</script>
+</body>
+</html>
