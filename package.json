@@ -1,1 +1,1 @@
-{"name":"turmaster-v12-11-multi-8-plus-2out","version":"12.11.0","main":"server.js","scripts":{"start":"node server.js"},"dependencies":{"express":"^4.18.2","cors":"^2.8.5"}}
+{"name":"turmaster-v12-12-final-corrige","version":"12.12.0","main":"server.js","scripts":{"start":"node server.js"},"dependencies":{"express":"^4.18.2","cors":"^2.8.5"}}
