@@ -1,45 +1,102 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>ADMIN V12.3 FINAL COMPLET</title>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>ADMIN V12.7 VERIF COMPLET BLOC1+BLOC2</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
-<style>body{background:#0f1115;color:#e6e8ee;font-family:system-ui;padding:20px} .card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:16px;margin:12px 0} .card.gold{border-color:#f5c51850;background:#f5c5180A} .card.green{border-color:#10b98150;background:#10b9810A} .card.dash{border-style:dashed;border-width:2px} textarea{width:100%;background:#0f1115;color:#e6e8ee;border:1px solid #2a3246;border-radius:8px;padding:12px} button{background:#f5c518;color:#000;border:0;padding:12px 20px;border-radius:8px;font-weight:700;cursor:pointer;margin:5px} .log{background:#0f1115;border:1px solid #2a3246;padding:10px;border-radius:8px;color:#6ee7b7;font-family:monospace;white-space:pre-wrap;max-height:800px;overflow:auto} .ok{background:#10b98120;border:1px solid #10b98140;padding:12px;border-radius:8px} .err{background:#ef444420;border:1px solid #ef444440;padding:12px;border-radius:8px;color:#fca5a5} input{background:#0f1115;border:1px solid #2a3246;border-radius:8px;padding:10px;color:#e6e8ee;width:100%}</style></head><body>
-<h1 style="color:#f5c518">V12.3 FINAL COMPLET - 21 TOPS COMPLETS + 8P + SYNTHESE 10-3pts + MULTI8 + VERIF + PARSER GENY FIX</h1>
-<div class="ok"><b>✅ V12.3 FINAL COMPLET - RIEN SUPPRIMÉ - TOUT EST LÀ:</b><br>
-1. <b>21 TOPS TOUS EN 8P</b>: Top Cotes Direct 8p, Top Chevaux 8p, Top Palmares 8p, Top Forme 8p FIX, Top Classe 8p, Top Drivers 8p FIX, Top Entraineurs 8p FIX, Aptitude 1er 8p, Aptitude Place 8p, Top Chronos 8p, Top Position 8p, Ecarts 8p, Incontournables 8p, Pour Une Place 8p, Synthese Ponderee 8p, Presse 8p FIX, Algo Perso 8p, Prono 8p, Synthese IA 8p, Synthese des Tops 10-3pts 8p<br>
-2. <b>SYNTHESE DES TOPS Barème 1er=10pts, 2e=9, 3e=8, 4e=7, 5e=6, 6e=5, 7e=4, 8e=3</b><br>
-3. <b>9 IA ACTIVES 8P</b>: CHATGPT, GEMINI, CLAUDE, GROK, PERPLEXITY, MISTRAL, DEEPSEEK, COPILOT, ZETURF_IA<br>
-4. <b>MULTI EN 8 FINAL</b>: Ticket 8 chevaux basé sur Synthèse 10-3pts<br>
-5. <b>VERIFICATEUR DETAILLE</b>: IA + Tops + Multi<br>
-6. <b>PARSER BUGFIX GENY SAINT-CLOUD</b>: Lit "1 Agile (13) Mlle M. Velon..." + Compiègne + Chantilly + Deauville + Auteuil + Vincennes</div>
+<style>
+*{box-sizing:border-box}
+body{background:#0f1115;color:#e6e8ee;font-family:system-ui;padding:0;margin:0}
+.topbar{background:#1a1f2e;border-bottom:1px solid #2a3246;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
+.wrap{max-width:1400px;margin:0 auto;padding:12px}
+.card{background:#1a1f2e;border:1px solid #2a3246;border-radius:12px;padding:14px;margin:10px 0}
+.card.gold{border-color:#f5c51860;background:#f5c51810}
+.card.green{border-color:#10b98140;background:#10b98108}
+.card.purple{border-color:#8b5cf640;background:#8b5cf608}
+.card.blue{border-color:#3b82f640;background:#3b82f608}
+.dash{border:2px dashed #f5c51860;border-radius:12px;padding:20px;text-align:center;cursor:pointer}
+.dash:hover{border-color:#f5c518;background:#f5c51808}
+textarea{width:100%;background:#0f1115;color:#e6e8ee;border:1px solid #2a3246;border-radius:8px;padding:10px;font-family:monospace;font-size:12px}
+button{background:#f5c518;color:#000;border:0;padding:10px 18px;border-radius:8px;font-weight:700;cursor:pointer;margin:4px}
+button.green{background:#10b981;color:#fff}
+button.purple{background:#8b5cf6;color:#fff}
+button.gray{background:#2a3246;color:#e6e8ee}
+.log{background:#0f1115;border:1px solid #2a3246;padding:10px;border-radius:8px;color:#9ca3af;font-family:monospace;font-size:11px;white-space:pre-wrap;max-height:500px;overflow:auto}
+input{background:#0f1115;border:1px solid #2a3246;border-radius:8px;padding:10px;color:#e6e8ee}
+.badge{display:inline-flex;padding:2px 8px;border-radius:999px;background:#f5c518;color:#000;font-weight:700;font-size:12px}
+.badge-green{background:#10b98120;color:#6ee7b7;border:1px solid #10b98130}
+.yellow{color:#f5c518}
+.small{font-size:11px;color:#8b93a7}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+</style></head><body>
+<div class="topbar"><div><b class="yellow">ADMIN V12.7 VERIF COMPLET BLOC1+BLOC2</b> <span class="small">BLOC1 PDF/IMAGE/TEXTE + BLOC2 PRONOS PERSO 8FAV+4OUT + VERIF DETAILLE BLOC1+BLOC2 - 21 TOPS + 9 IA</span></div><a href="/" style="color:#f5c518">← Principale</a></div>
+<div class="wrap">
+<div class="card gold"><div style="font-size:28px;font-weight:900;color:#f5c518;text-align:center" id="multi8Display">7-15-2-11-13-3-5-10</div><div style="text-align:center" class="small">Multi en 8 officiel - 210€ plein / 35€ Flexi 50% - 7=109pts 15=109pts 2=102pts - 22 sources</div></div>
 
-<div class="card dash" id="dropZone"><h3>📁 Glisse ici ton fichier Geny/Zeturf (PDF, TXT, PNG, JPG) - V12.3 COMPLET</h3>
-<input type="file" id="fileInput" accept=".pdf,.txt,.png,.jpg,.jpeg"><div id="fileStatus" class="log" style="margin-top:8px">En attente fichier...</div></div>
+<div class="grid2">
+<!-- BLOC 1 -->
+<div class="card blue">
+<h3 style="margin:0 0 8px 0;color:#60a5fa">📁 BLOC 1 - FICHIERS GENY / ZETURF / IMAGES / TEXTES</h3>
+<div class="small">Lit PDF, images (OCR), textes - 21 Tops + 9 IA + Multi8 officiels</div>
+<div class="dash" id="dropZone" style="margin:10px 0">
+<div style="font-size:28px">📄</div>
+<b>Glisser PDF, Image, TXT ici</b><br><span class="small">PDF Geny, Zeturf, PNG, JPG, TXT - OCR auto</span><br>
+<input type="file" id="fileInput" accept=".pdf,.txt,.png,.jpg,.jpeg" style="display:none">
+<button class="gray" onclick="document.getElementById('fileInput').click()">Parcourir</button>
+<div id="fileStatus" class="small" style="margin-top:8px">Prêt - PDF + Image + Texte</div>
+</div>
+<textarea id="t1" rows="6" placeholder="Texte Geny collé ici: 1 Agile (13) Mlle M. Velon... ou texte Zeturf 1 - SIR MARVEL - ..."></textarea>
+<div style="margin-top:6px">
+<button onclick="autoUpdateBloc1()">METTRE À JOUR BLOC1 - PDF/IMAGE/TEXTE</button>
+<button class="gray" onclick="check()">ACTUALISER</button>
+</div>
+</div>
 
-<div class="card"><textarea id="t" rows="10" placeholder="Colle texte Geny Saint-Cloud 25/10:
-1 Agile (13) Mlle M. Velon J.-M. Beguigne F7 61,5kg - 26,4
-2 Shripara (6) A. Hamelin Mlle C. Fey F4 60kg - 3,6
-..."></textarea><br><button onclick="autoUpdate()">METTRE À JOUR 8P + 21 TOPS + MULTI8 - V12.3 COMPLET</button><button onclick="check()">VOIR COURSE + 21 TOPS + MULTI8 + SYNTHESE 10-3pts</button><button onclick="location.href='/'">Page principale 21 TOPS</button></div>
+<!-- BLOC 2 -->
+<div class="card purple">
+<h3 style="margin:0 0 8px 0;color:#a78bfa">🎯 BLOC 2 - PRONOS PERSO - COMPILATION À LA DEMANDE</h3>
+<div class="small">Compile tes pronos perso - Analyse - 8 favs + 4 outsiders - Barème 1er=10pts → 10e=1pt</div>
+<textarea id="t2" rows="10" placeholder="Colle ici tes pronos perso, 1 prono par ligne:
+Ex:
+11-7-15-10-13-2-6-9
+13-15-12-5-8-1-3-10
+2-7-13-3-8-15-1-6
+8-7-3-10-12-1-4-5
+16-4-2-3-6-13-15-5-10-7
+3-7-11-15-6-1-8-10-5-4
+7-10-4-8-9-5-15-16-11-3
+2-15-3-8-13-7-11-9
+... etc chaque ligne = 1 prono perso"></textarea>
+<div style="margin-top:6px">
+<button class="purple" onclick="compilePerso()">COMPILER PRONOS PERSO → 8 FAVS + 4 OUTSIDERS</button>
+<button class="gray" onclick="clearPerso()">EFFACER</button>
+</div>
+<div id="persoStatus" class="small" style="margin-top:8px">Prêt - Colle tes pronos perso</div>
+</div>
+</div>
 
-<div class="card gold" id="multi8Card" style="display:none"><h3>🎯 MULTI EN 8 FINAL - V12.3</h3><div id="multi8Content"></div></div>
+<div class="grid2">
+<div class="card gold"><h3 style="margin:0;color:#f5c518">🏆 SYNTHESE OFFICIELLE 22 SOURCES - 10→1pt</h3><div id="syntheseContent" style="margin-top:8px"></div></div>
+<div class="card purple"><h3 style="margin:0;color:#a78bfa">🎯 RESULTAT COMPILATION PERSO - 8 FAVS + 4 OUTSIDERS</h3><div id="persoResult" style="margin-top:8px"><span class="small">En attente compilation perso...</span></div></div>
+</div>
 
-<div class="card" id="syntheseCard" style="display:none"><h3>🏆 SYNTHESE DES TOPS 10-3pts - V12.3</h3><div id="syntheseContent"></div></div>
+<div class="card"><h3 style="margin:0">21 TOPS COMPLETS + 9 IA + VERIF</h3><div id="topsContent" class="small" style="margin-top:8px"></div></div>
 
-<div class="card" id="topsCard" style="display:none"><h3>📋 21 TOPS 8P - V12.3 COMPLET</h3><div id="topsContent"></div></div>
+<div class="card green"><h3 style="margin:0;color:#10b981">VERIFICATEUR RESULTAT</h3>
+<div style="display:flex;gap:8px;margin-top:8px"><input id="arriveeInput" placeholder="2-5-3-9-1" style="flex:1"><button class="green" onclick="verifier()">VERIFIER</button></div>
+<div id="verifResult" class="log" style="margin-top:8px;display:none"></div>
+</div>
 
-<div class="card green" id="verifCard"><h3>🏁 VERIFICATEUR RESULTATS DETAILLES - V12.3</h3>
-<div style="display:flex;gap:8px"><input id="arriveeInput" placeholder="Ex: 2-5-3-9-1"><button onclick="verifier()">VERIFIER RESULTATS DETAILLES</button></div>
-<div id="verifResult" class="log" style="margin-top:12px;display:none"></div></div>
-
-<div id="log" class="log">V12.3 COMPLET prêt - Tous les 21 Tops + Synthèse 10-3pts + Multi8 + Verif + Parser Geny...</div>
+<div id="log" class="log">V12.6 DOUBLE BLOC prêt - BLOC1 PDF/Image/Texte + BLOC2 Pronos Perso 8 favs + 4 outsiders - 21 Tops + 9 IA conservés</div>
+</div>
 
 <script>
 if(typeof pdfjsLib!=='undefined'){ pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; }
-const fileInput=document.getElementById('fileInput'); const dropZone=document.getElementById('dropZone'); const fileStatus=document.getElementById('fileStatus'); const tArea=document.getElementById('t');
+const fileInput=document.getElementById('fileInput'); const dropZone=document.getElementById('dropZone'); const fileStatus=document.getElementById('fileStatus');
 fileInput.addEventListener('change', e=>{ if(e.target.files[0]) handleFile(e.target.files[0]); });
 dropZone.addEventListener('dragover', e=>{ e.preventDefault(); dropZone.style.borderColor='#f5c518'; });
-dropZone.addEventListener('dragleave', e=>{ dropZone.style.borderColor='#2a3246'; });
-dropZone.addEventListener('drop', e=>{ e.preventDefault(); dropZone.style.borderColor='#2a3246'; if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+dropZone.addEventListener('dragleave', e=>{ dropZone.style.borderColor='#f5c51860'; });
+dropZone.addEventListener('drop', e=>{ e.preventDefault(); dropZone.style.borderColor='#f5c51860'; if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
 async function handleFile(file){
-  fileStatus.textContent='Lecture '+file.name+'...';
+  fileStatus.textContent=file.name+' - Lecture...';
   const name=file.name.toLowerCase();
   if(name.endsWith('.pdf')){
     try{
@@ -47,42 +104,85 @@ async function handleFile(file){
       const pdf=await pdfjsLib.getDocument({data:buffer}).promise;
       let fullText='';
       for(let i=1;i<=pdf.numPages;i++){ const page=await pdf.getPage(i); const content=await page.getTextContent(); fullText+=content.items.map(it=>it.str).join(' ')+'\n'; }
-      tArea.value=fullText;
-      fileStatus.innerHTML='✅ PDF lu ('+pdf.numPages+' pages) - '+fullText.slice(0,500)+'...<br>Geny détecté: '+(fullText.match(/\d+\s+[A-Z][a-z]+\s+\(\d+\)/g)||[]).length+' chevaux';
-      setTimeout(autoUpdate,500);
-    }catch(e){ fileStatus.textContent='❌ Erreur PDF: '+e.message; }
-  } else if(name.endsWith('.txt')){
-    const text=await file.text(); tArea.value=text; fileStatus.textContent='✅ TXT lu';
+      document.getElementById('t1').value=fullText;
+      fileStatus.textContent='✅ PDF '+pdf.numPages+'p - '+fullText.length+' car - BLOC1 prêt - Clique METTRE À JOUR BLOC1';
+    }catch(e){ fileStatus.textContent='❌ PDF: '+e.message; }
   } else if(name.endsWith('.png')||name.endsWith('.jpg')||name.endsWith('.jpeg')){
-    fileStatus.textContent='OCR en cours...';
-    try{ const {data:{text}}=await Tesseract.recognize(file,'fra+eng'); tArea.value=text; fileStatus.textContent='✅ OCR: '+text.slice(0,200); }catch(e){ fileStatus.textContent='❌ OCR: '+e.message; }
-  } else { const text=await file.text(); tArea.value=text; }
+    fileStatus.textContent='OCR image...';
+    try{ const {data:{text}}=await Tesseract.recognize(file,'fra+eng'); document.getElementById('t1').value=text; fileStatus.textContent='✅ OCR image - '+text.length+' car - BLOC1 prêt'; }catch(e){ fileStatus.textContent='❌ OCR: '+e.message; }
+  } else {
+    const text=await file.text(); document.getElementById('t1').value=text; fileStatus.textContent='✅ TXT lu - BLOC1 prêt';
+  }
 }
 async function check(){
   const r=await fetch('/api/course-du-jour?t='+Date.now()); const j=await r.json();
-  const logEl=document.getElementById('log');
-  logEl.innerText='MODE: '+j.mode+'\nCOURSE: '+j.data.hippodrome+' - '+j.data.nom+' - '+j.data.partants+' partants\n\nMULTI8: '+JSON.stringify(j.analyses.multi8Detail,null,2)+'\n\nSYNTHESE DES TOPS (10-3pts): '+JSON.stringify(j.analyses.syntheseDesTops,null,2)+'\n\nSYNTHESE IA: '+JSON.stringify(j.analyses.syntheseIA,null,2)+'\n\n21 TOPS:\n'+JSON.stringify({topCotesDirect:j.analyses.topCotesDirect, topChevaux:j.analyses.topChevaux, topPalmares:j.analyses.topPalmares, topForme:j.analyses.topForme, topClasse:j.analyses.topClasse, topDrivers:j.analyses.topDrivers, topEntraineurs:j.analyses.topEntraineurs},null,2)+'\n\nSYNTHESE FINALE: '+j.analyses.synthese;
-  if(j.analyses.multi8Detail){
-    document.getElementById('multi8Card').style.display='block';
-    document.getElementById('multi8Content').innerHTML='<div style=\'font-size:28px;font-weight:800;color:#f5c518\'>'+j.analyses.multi8Detail.ticketStr+'</div><div>'+j.analyses.multi8Detail.coutPlein+'</div><div>'+j.analyses.multi8Detail.coutFlexi50+'</div>';
+  document.getElementById('multi8Display').innerText=j.analyses.multi8Detail.ticketStr;
+  document.getElementById('syntheseContent').innerHTML=j.analyses.syntheseDesTops.map((s,i)=>'<div><span class=badge>'+s.num+'</span> '+s.nom+' <b>'+s.points+'pts</b> ('+s.citations+' cit) - Place '+(i+1)+'e</div>').join('');
+  document.getElementById('topsContent').innerHTML='Top Cotes Direct: '+j.analyses.topCotesDirect.map(c=>c.num).join('-')+'<br>Top Chevaux: '+j.analyses.topChevaux.map(c=>c.num).join('-')+'<br>Top Forme 8p FIX: '+j.analyses.topForme.map(c=>c.num).join('-')+'<br>Top Drivers 8p FIX: '+j.analyses.topDrivers.map(c=>c.num).join('-')+'<br>Top Entraineurs 8p FIX: '+j.analyses.topEntraineurs.map(c=>c.num).join('-')+'<br>Presse 8p FIX: '+j.analyses.presse.map(c=>c.num).join('-')+'<br>Synthèse Ponderee: '+j.analyses.synthesePonderee.map(c=>c.num).join('-')+'<br>IA: '+Object.keys(j.ia_pronos).map(k=>k+': '+j.ia_pronos[k].fav.join('-')).join(' | ');
+  document.getElementById('log').innerText='BLOC1: '+j.data.hippodrome+' - '+j.data.partants+' partants - Multi officiel: '+j.analyses.multi8Detail.ticketStr+'\nMode: '+j.mode;
+  if(j.data.perso && j.data.perso.favoris8){
+    showPersoResult(j.data.perso);
   }
-  if(j.analyses.syntheseDesTops){
-    document.getElementById('syntheseCard').style.display='block';
-    document.getElementById('syntheseContent').innerHTML=j.analyses.syntheseDesTops.map((s,i)=>'<div>'+(i+1)+'e: '+s.num+' '+s.nom+' '+s.points+'pts</div>').join('');
-  }
-  document.getElementById('topsCard').style.display='block';
-  document.getElementById('topsContent').innerHTML='<div>Top Cotes Direct 8p: '+j.analyses.topCotesDirect.map(c=>c.num).join('-')+'<br>Top Chevaux 8p: '+j.analyses.topChevaux.map(c=>c.num).join('-')+'<br>Top Forme 8p FIX: '+j.analyses.topForme.map(c=>c.num).join('-')+'<br>Top Drivers 8p FIX: '+j.analyses.topDrivers.map(c=>c.num).join('-')+'<br>Top Entraineurs 8p FIX: '+j.analyses.topEntraineurs.map(c=>c.num).join('-')+'<br>Synthese Ponderee 8p: '+j.analyses.synthesePonderee.map(c=>c.num).join('-')+'<br>Presse 8p FIX: '+j.analyses.presse.map(c=>c.num).join('-')+'</div>';
 }
-async function autoUpdate(){
-  const text=document.getElementById('t').value; if(!text) return alert('Colle texte');
+async function autoUpdateBloc1(){
+  const text=document.getElementById('t1').value; if(!text) return alert('Colle texte BLOC1');
   const r=await fetch('/api/auto-update',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})}); const j=await r.json();
   document.getElementById('log').innerText=JSON.stringify(j,null,2);
-  if(j.success){ alert('✅ V12.3 COMPLET: '+j.message); check(); }
+  if(j.success){ fileStatus.textContent='✅ BLOC1: '+j.message; check(); }
 }
+async function compilePerso(){
+  const text=document.getElementById('t2').value; if(!text) return alert('Colle tes pronos perso dans BLOC2');
+  document.getElementById('persoStatus').textContent='Compilation perso en cours...';
+  const r=await fetch('/api/compilation-perso',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})}); const j=await r.json();
+  if(j.success){
+    showPersoResult(j);
+    document.getElementById('persoStatus').textContent='✅ BLOC2: '+j.message+' - 8 favs + 4 outsiders';
+    document.getElementById('log').innerText='BLOC2 PERSO: '+j.totalSources+' pronos perso compilés\nFavoris 8: '+j.favoris8.map(f=>f.num).join('-')+'\nOutsiders 4: '+j.outsiders4.map(o=>o.num).join('-')+'\nDétails:\n'+j.ranked.map(r=>r.num+'='+r.points+'pts ('+r.citations+' cit)').join(' ');
+  } else {
+    document.getElementById('persoStatus').textContent='❌ '+j.message;
+  }
+}
+function showPersoResult(j){
+  const favs = j.favoris8||[]; const outs = j.outsiders4||[]; const ranked = j.ranked||[];
+  let html = '<div class="card" style=background:#10b98115><b style=color:#10b981>8 FAVORIS - BLOC2 PERSO</b><br>';
+  html+='<div style=font-size:22px;font-weight:800;color:#f5c518>'+favs.map(f=>f.num).join('-')+'</div>';
+  html+=favs.map((f,i)=>'<div><span class=badge>'+f.num+'</span> '+f.points+'pts ('+f.citations+' cit) - Place '+(i+1)+'e - '+[10,9,8,7,6,5,4,3][i]+'pts</div>').join('');
+  html+='</div>';
+  html+='<div class="card" style=background:#f59e0b15;margin-top:8px><b style=color:#f59e0b>4 OUTSIDERS - BLOC2 PERSO</b><br>';
+  html+='<div style=font-size:18px;font-weight:800;color:#f5c518>'+outs.map(o=>o.num).join('-')+'</div>';
+  html+=outs.map((o,i)=>'<div><span class=badge>'+o.num+'</span> '+o.points+'pts ('+o.citations+' cit)</div>').join('');
+  html+='</div>';
+  html+='<div class=small style=margin-top:8px>Classement complet: '+ranked.map(r=>r.num+'('+r.points+'pts)').join(' ')+'<br>Sources: '+j.totalSources+' pronos perso - Barème '+j.bareme+'</div>';
+  document.getElementById('persoResult').innerHTML=html;
+}
+function clearPerso(){ document.getElementById('t2').value=''; document.getElementById('persoResult').innerHTML='<span class=small>En attente compilation perso...</span>'; document.getElementById('persoStatus').textContent='Effacé - Prêt'; }
 async function verifier(){
-  const arrivee=document.getElementById('arriveeInput').value; if(!arrivee) return alert('Tape arrivée');
+  const arrivee=document.getElementById('arriveeInput').value; if(!arrivee) return alert('Tape arrivée ex: 7-15-2-11-13');
   const r=await fetch('/api/verifier-resultat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({arrivee})}); const j=await r.json();
-  if(j.success){ const el=document.getElementById('verifResult'); el.style.display='block'; el.innerText=JSON.stringify(j.verification,null,2); }
+  if(j.success){
+    const el=document.getElementById('verifResult'); el.style.display='block';
+    const v=j.verification;
+    let html = `🏁 ARRIVÉE: ${v.arrivee.join('-')} - ${new Date(v.date).toLocaleString('fr-FR')}\n\n`;
+    html += `=== MULTI OFFICIEL BLOC1 (22 sources) ===\nTicket: ${v.checkMulti.ticketStr}\nDans 4: ${v.checkMulti.dans4}/4 - Dans 5: ${v.checkMulti.dans5}/5 - ${v.checkMulti.multiGagne}\n\n`;
+    if(v.checkPerso){
+      html += `=== MULTI PERSO BLOC2 (${v.checkPerso.totalSources} pronos perso) ===\nFavoris 8: ${v.checkPerso.favoris8}\nOutsiders 4: ${v.checkPerso.outsiders4}\nDans 4: ${v.checkPerso.dans4}/4 - Dans 5: ${v.checkPerso.dans5}/5 - ${v.checkPerso.multiPersoGagne}\nTiercé: ${v.checkPerso.tierce} - Quinte: ${v.checkPerso.quinte}\n\n`;
+      html += `=== COMPARAISON BLOC1 vs BLOC2 ===\n${v.syntheseCompare.meilleur}\nOfficiel: ${v.checkMulti.dans4}/4 - Perso: ${v.checkPerso.dans4}/4\n\n`;
+    }
+    html += `=== 9 IA ACTIVES (BLOC1) ===\n`;
+    Object.keys(v.checkIA).forEach(ia=>{
+      const c=v.checkIA[ia];
+      html += `${ia}: Fav ${c.fav} - Tiercé ${c.tierce} - Quarte ${c.quarte} - Quinte ${c.quinte} - Dans 8: ${c.dans8}\n`;
+    });
+    html += `\n=== 21 TOPS COMPLETS (BLOC1) ===\n`;
+    Object.keys(v.checkTops).forEach(top=>{
+      const c=v.checkTops[top];
+      html += `${top}: ${c.nums} - Tiercé ${c.tierce} ${c.tierceOk?'✅':''} - Quinte ${c.quinte} ${c.quinteOk?'✅':''}\n`;
+    });
+    html += `\n=== RÉSUMÉ FINAL ===\nArrivée: ${v.arrivee.join('-')}\nOfficiel: ${v.checkMulti.multiGagne} (${v.checkMulti.dans4}/4)\n`;
+    if(v.checkPerso) html += `Perso: ${v.checkPerso.multiPersoGagne} (${v.checkPerso.dans4}/4)\nMeilleur: ${v.syntheseCompare.meilleur}\n`;
+    html += `Total Tops vérifiés: ${v.totalTops} - Total IA: ${v.totalIA}\n`;
+    el.innerText=html;
+  }
 }
 check();
 </script></body></html>
